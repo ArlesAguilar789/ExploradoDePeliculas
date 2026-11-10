@@ -1,1 +1,1 @@
-"# Explorador de Pel¡culas" 
+"# Explorador de Peliculas" 
