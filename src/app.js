@@ -18,9 +18,18 @@ const app = createApp({
   setup() {
     const catalogo = ref(CATALOGO_CONTENIDO);
     const terminoBusqueda = ref("");
+    const idDestacadoActivo = ref(1);
+
+    const obrasDestacadas = computed(() => {
+      return catalogo.value.filter((item) => item.destacado);
+    });
 
     const contenidoDestacado = computed(() => {
-      return catalogo.value.find((item) => item.destacado) || catalogo.value[0];
+      return (
+        catalogo.value.find((item) => item.id === idDestacadoActivo.value) ||
+        obrasDestacadas.value[0] ||
+        catalogo.value[0]
+      );
     });
 
     const busquedaActiva = computed(() => {
@@ -36,9 +45,11 @@ const app = createApp({
       return catalogo.value.filter((item) => {
         const tituloNormalizado = normalizarTexto(item.titulo);
         const directorNormalizado = normalizarTexto(item.director);
+        const generoNormalizado = normalizarTexto(item.genero);
         return (
           tituloNormalizado.includes(consulta) ||
-          directorNormalizado.includes(consulta)
+          directorNormalizado.includes(consulta) ||
+          generoNormalizado.includes(consulta)
         );
       });
     });
@@ -51,6 +62,10 @@ const app = createApp({
       return catalogo.value.filter((item) => item.tipo === "Serie").length;
     });
 
+    function seleccionarDestacado(id) {
+      idDestacadoActivo.value = id;
+    }
+
     function limpiarBusqueda() {
       terminoBusqueda.value = "";
     }
@@ -58,11 +73,14 @@ const app = createApp({
     return {
       catalogo,
       terminoBusqueda,
+      idDestacadoActivo,
+      obrasDestacadas,
       contenidoDestacado,
       busquedaActiva,
       catalogoFiltrado,
       totalPeliculas,
       totalSeries,
+      seleccionarDestacado,
       limpiarBusqueda
     };
   }
