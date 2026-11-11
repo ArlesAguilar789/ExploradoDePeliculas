@@ -28,49 +28,86 @@
           <span class="catalog-stat">
             <strong>{{ totalSeries }}</strong> series
           </span>
+          <span class="catalog-stat catalog-stat-total">
+            <strong>{{ catalogo.length }}</strong> en archivo
+          </span>
         </div>
       </div>
     </header>
 
     <main class="main-container">
       <section class="hero-editorial" v-if="contenidoDestacado && !busquedaActiva">
+        <div
+          class="hero-ambient-bg"
+          :style="{ backgroundImage: 'url(\'' + contenidoDestacado.imagen + '\')' }"
+        ></div>
+
         <div class="hero-copy">
-          <div>
-            <span class="hero-kicker">Selección de archivo</span>
+          <div class="hero-top-group">
+            <div class="hero-meta-bar">
+              <span class="hero-kicker">Selección de archivo</span>
+              <span class="hero-pill">{{ contenidoDestacado.tipo }}</span>
+              <span class="hero-pill">{{ contenidoDestacado.clasificacion }}</span>
+              <span class="hero-pill hero-pill-gold">Calificación {{ contenidoDestacado.calificacion }}</span>
+            </div>
+
             <h1 class="hero-headline">{{ contenidoDestacado.titulo }}</h1>
             <p class="hero-synopsis">{{ contenidoDestacado.sinopsis }}</p>
           </div>
 
-          <div class="hero-specs">
-            <div class="spec-item">
-              <span class="spec-label">Formato</span>
-              <span class="spec-value">{{ contenidoDestacado.tipo }}</span>
+          <div class="hero-bottom-group">
+            <div class="hero-specs">
+              <div class="spec-item">
+                <span class="spec-label">Género principal</span>
+                <span class="spec-value">{{ contenidoDestacado.genero }}</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">Año de estreno</span>
+                <span class="spec-value">{{ contenidoDestacado.anio }}</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">Extensión</span>
+                <span class="spec-value">{{ contenidoDestacado.duracion }}</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">Dirección</span>
+                <span class="spec-value">{{ contenidoDestacado.director }}</span>
+              </div>
             </div>
-            <div class="spec-item">
-              <span class="spec-label">Género</span>
-              <span class="spec-value">{{ contenidoDestacado.genero }}</span>
-            </div>
-            <div class="spec-item">
-              <span class="spec-label">Año</span>
-              <span class="spec-value">{{ contenidoDestacado.anio }}</span>
-            </div>
-            <div class="spec-item">
-              <span class="spec-label">Extensión</span>
-              <span class="spec-value">{{ contenidoDestacado.duracion }}</span>
-            </div>
-            <div class="spec-item">
-              <span class="spec-label">Dirección</span>
-              <span class="spec-value">{{ contenidoDestacado.director }}</span>
+
+            <div class="hero-selector">
+              <div class="hero-selector-header">
+                <span class="hero-selector-label">En portada principal</span>
+                <span class="hero-selector-hint">Selecciona una obra para previsualizar su ficha</span>
+              </div>
+              <div class="hero-selector-track">
+                <button
+                  v-for="obra in obrasDestacadas"
+                  :key="obra.id"
+                  type="button"
+                  class="hero-thumb-card"
+                  :class="{ 'is-selected': obra.id === contenidoDestacado.id }"
+                  @click="seleccionarDestacado(obra.id)"
+                >
+                  <img :src="obra.imagen" :alt="obra.titulo" class="hero-thumb-img">
+                  <div class="hero-thumb-info">
+                    <span class="hero-thumb-title">{{ obra.titulo }}</span>
+                    <span class="hero-thumb-sub">{{ obra.genero }} · {{ obra.anio }}</span>
+                  </div>
+                </button>
+              </div>
             </div>
           </div>
         </div>
 
         <div class="hero-visual">
-          <img
-            :src="contenidoDestacado.imagen"
-            :alt="contenidoDestacado.titulo"
-            class="hero-image"
-          >
+          <div class="hero-poster-showcase">
+            <img
+              :src="contenidoDestacado.imagen"
+              :alt="contenidoDestacado.titulo"
+              class="hero-image"
+            >
+          </div>
         </div>
       </section>
 
@@ -107,7 +144,7 @@
         <div class="empty-catalog-state" v-else>
           <h3 class="empty-state-title">Sin coincidencias en el catálogo</h3>
           <p class="empty-state-text">
-            No se encontraron películas ni series que coincidan con "{{ terminoBusqueda.trim() }}". Intenta con otro título o nombre de director.
+            No se encontraron películas ni series que coincidan con "{{ terminoBusqueda.trim() }}". Intenta con otro título, género o nombre de director.
           </p>
           <button
             type="button"
@@ -121,7 +158,7 @@
     </main>
 
     <footer class="site-footer">
-      <div class="footer-inner">
+      <div class="site-footer-inner footer-inner">
         <span>CineSpot — Explorador de películas y series</span>
         <span>Desarrollado con Vue.js 3</span>
       </div>

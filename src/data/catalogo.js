@@ -15,6 +15,48 @@ const CATALOGO_CONTENIDO = [
   },
   {
     id: 2,
+    titulo: "El Señor de los Anillos",
+    tipo: "Película",
+    genero: "Fantasía",
+    anio: 2026,
+    duracion: "178 min",
+    director: "Producción Especial",
+    clasificacion: "PG-13",
+    calificacion: "9.6",
+    imagen: "Imagenes/El Señor de los anillos.png",
+    destacado: true,
+    sinopsis: "En las tierras ancestrales de la Tierra Media, dos compañeros inseparables emprenden una peligrosa travesía desde los valles élficos hasta las sombras de Mordor para destruir el Anillo Único antes de que el ojo de Sauron consuma el reino de los hombres."
+  },
+  {
+    id: 3,
+    titulo: "El tiempo se detiene cuando estoy contigo",
+    tipo: "Película",
+    genero: "Romance",
+    anio: 2026,
+    duracion: "116 min",
+    director: "Producción Especial",
+    clasificacion: "B",
+    calificacion: "9.3",
+    imagen: "Imagenes/El tiempo se detiene cuando estoy contigo.png",
+    destacado: true,
+    sinopsis: "Bajo los cerezos en flor del campus de la Universidad Nacional de Seúl, dos estudiantes de mundos opuestos coinciden en la misma aula durante la primavera, descubriendo que cada instante compartido transforma por completo su manera de entender la vida."
+  },
+  {
+    id: 4,
+    titulo: "TECNM vs TECMTY",
+    tipo: "Película",
+    genero: "Acción",
+    anio: 2026,
+    duracion: "138 min",
+    director: "Producción Especial",
+    clasificacion: "B-15",
+    calificacion: "9.4",
+    imagen: "Imagenes/TECNM VS TECMTY.png",
+    destacado: true,
+    sinopsis: "Dos instituciones históricas se enfrentan en una intensa disputa de poder, estrategia e influencia que marcó a toda una generación en el norte del país, donde la lealtad de cada bando se pone a prueba hasta las últimas consecuencias."
+  },
+  {
+    id: 5,
     titulo: "Taxi Driver",
     tipo: "Película",
     genero: "Drama psicológico",
@@ -24,11 +66,11 @@ const CATALOGO_CONTENIDO = [
     clasificacion: "R",
     calificacion: "8.2",
     imagen: "Imagenes/Taxi Driver.jpg",
-    destacado: false,
+    destacado: true,
     sinopsis: "Travis Bickle, un veterano de guerra con insomnio crónico, trabaja como taxista nocturno en las calles de Nueva York mientras el aislamiento urbano y la decadencia moral que observa alimentan su deterioro mental."
   },
   {
-    id: 3,
+    id: 6,
     titulo: "Better Call Saul",
     tipo: "Serie",
     genero: "Drama criminal",
@@ -42,7 +84,7 @@ const CATALOGO_CONTENIDO = [
     sinopsis: "Seis años antes de conocer a Walter White, el abogado de poca monta Jimmy McGill lucha por construir una carrera respetable en Nuevo México, en un recorrido ético que lo transforma gradualmente en el implacable defensor penal Saul Goodman."
   },
   {
-    id: 4,
+    id: 7,
     titulo: "American Psycho",
     tipo: "Película",
     genero: "Suspenso",
@@ -56,21 +98,7 @@ const CATALOGO_CONTENIDO = [
     sinopsis: "En el Manhattan financiero de finales de los años ochenta, Patrick Bateman, un joven ejecutivo de inversiones obsesionado con el estatus y las apariencias, oculta una doble vida violenta tras su fachada corporativa impecable."
   },
   {
-    id: 5,
-    titulo: "TECNM vs TECMTY",
-    tipo: "Película",
-    genero: "Acción",
-    anio: 2026,
-    duracion: "138 min",
-    director: "Producción Especial",
-    clasificacion: "B-15",
-    calificacion: "9.4",
-    imagen: "Imagenes/TECNM VS TECMTY.png",
-    destacado: false,
-    sinopsis: "Dos instituciones históricas se enfrentan en una intensa disputa de poder, estrategia e influencia que marcó a toda una generación en el norte del país, donde la lealtad de cada bando se pone a prueba hasta las últimas consecuencias."
-  },
-  {
-    id: 6,
+    id: 8,
     titulo: "Game of Thrones",
     tipo: "Serie",
     genero: "Fantasía",
@@ -84,7 +112,7 @@ const CATALOGO_CONTENIDO = [
     sinopsis: "Nueve familias nobles conspiran y combaten por el control de las tierras míticas de Poniente y el Trono de Hierro, mientras una antigua amenaza olvidada durante milenios despierta más allá del Muro norte."
   },
   {
-    id: 7,
+    id: 9,
     titulo: "Cyberpunk: Edgerunners",
     tipo: "Serie",
     genero: "Ciencia ficción",
@@ -98,7 +126,7 @@ const CATALOGO_CONTENIDO = [
     sinopsis: "En una metrópoli distópica dominada por megacorporaciones y modificaciones cibernéticas, un joven de la calle intenta sobrevivir tras perderlo todo convirtiéndose en un mercenario fuera de la ley conocido como edgerunner."
   },
   {
-    id: 8,
+    id: 10,
     titulo: "Joker",
     tipo: "Película",
     genero: "Drama psicológico",
@@ -112,7 +140,7 @@ const CATALOGO_CONTENIDO = [
     sinopsis: "Arthur Fleck, un comediante con problemas neurológicos ignorado por una Ciudad Gótica fracturada y hostil, inicia una espiral descendente que desencadena una revuelta social sin precedentes."
   },
   {
-    id: 9,
+    id: 11,
     titulo: "Hannibal",
     tipo: "Serie",
     genero: "Suspenso",
@@ -126,7 +154,7 @@ const CATALOGO_CONTENIDO = [
     sinopsis: "El perfilador criminal del FBI Will Graham, dotado de una empatía extrema para reconstruir escenas del crimen, colabora con el prestigioso psiquiatra forense Hannibal Lecter sin sospechar que su consultor es un asesino metódico."
   },
   {
-    id: 10,
+    id: 12,
     titulo: "Dexter",
     tipo: "Serie",
     genero: "Drama criminal",
@@ -140,7 +168,7 @@ const CATALOGO_CONTENIDO = [
     sinopsis: "De día, Dexter Morgan trabaja como analista forense de patrones de sangre para la policía metropolitana de Miami; de noche, canaliza sus impulsos homicidas persiguiendo a criminales que han logrado evadir la justicia."
   },
   {
-    id: 11,
+    id: 13,
     titulo: "Neon Genesis Evangelion",
     tipo: "Serie",
     genero: "Ciencia ficción",
@@ -154,7 +182,7 @@ const CATALOGO_CONTENIDO = [
     sinopsis: "Quince años después de un cataclismo global, el adolescente Shinji Ikari es reclutado en Tokio-3 por la organización NERV para pilotar una unidad biomecánica gigante y defender a la humanidad de entidades enigmáticas."
   },
   {
-    id: 12,
+    id: 14,
     titulo: "La Ley de los Audaces",
     tipo: "Serie",
     genero: "Drama legal",
@@ -168,7 +196,7 @@ const CATALOGO_CONTENIDO = [
     sinopsis: "Harvey Specter, uno de los abogados corporativos más influyentes de Nueva York, contrata a Mike Ross, un joven con memoria fotográfica que nunca asistió a la facultad de derecho, manteniendo el secreto frente a toda la firma."
   },
   {
-    id: 13,
+    id: 15,
     titulo: "The Mentalist",
     tipo: "Serie",
     genero: "Suspenso",
@@ -182,7 +210,7 @@ const CATALOGO_CONTENIDO = [
     sinopsis: "Patrick Jane, un antiguo médium televisivo con una extraordinaria capacidad de observación y deducción, asesora al Buró de Investigación de California en casos de homicidio mientras rastrea al asesino en serie Red John."
   },
   {
-    id: 14,
+    id: 16,
     titulo: "Misión Imposible",
     tipo: "Película",
     genero: "Acción",
@@ -196,7 +224,7 @@ const CATALOGO_CONTENIDO = [
     sinopsis: "Tras una operación fallida en Praga donde su equipo es eliminado, el agente especial Ethan Hunt descubre que ha sido incriminado como traidor y debe infiltrarse en la sede central de la CIA para descubrir al verdadero infiltrado."
   },
   {
-    id: 15,
+    id: 17,
     titulo: "Resident Evil: Noche Cero",
     tipo: "Película",
     genero: "Terror",
@@ -210,7 +238,7 @@ const CATALOGO_CONTENIDO = [
     sinopsis: "En las afueras de Raccoon City, una llamada de auxilio en medio de la noche arrastra a un sobreviviente al epicentro de un brote biológico clandestino donde cada habitación oculta el origen del experimento."
   },
   {
-    id: 16,
+    id: 18,
     titulo: "The Walking Dead",
     tipo: "Serie",
     genero: "Terror",
@@ -224,7 +252,7 @@ const CATALOGO_CONTENIDO = [
     sinopsis: "El oficial de policía Rick Grimes despierta de un coma para encontrar una civilización devastada por una epidemia apocalíptica y lidera a un grupo de sobrevivientes en la búsqueda de refugio."
   },
   {
-    id: 17,
+    id: 19,
     titulo: "Leatherface",
     tipo: "Película",
     genero: "Terror",
@@ -238,7 +266,7 @@ const CATALOGO_CONTENIDO = [
     sinopsis: "Cuatro internos violentos escapan de un hospital psiquiátrico en Texas llevando como rehén a una joven enfermera, perseguidos por un comisario decidido a vengarse mientras uno de los fugitivos desciende a la locura."
   },
   {
-    id: 18,
+    id: 20,
     titulo: "Rango",
     tipo: "Película",
     genero: "Animación",
@@ -252,7 +280,7 @@ const CATALOGO_CONTENIDO = [
     sinopsis: "Un camaleón doméstico con aspiraciones teatrales termina accidentalmente en el árido pueblo fronterizo de Polvo, en el desierto de Mojave, donde asume el cargo de comisario y debe resolver una conspiración por el agua."
   },
   {
-    id: 19,
+    id: 21,
     titulo: "Megamente",
     tipo: "Película",
     genero: "Animación",
@@ -266,7 +294,7 @@ const CATALOGO_CONTENIDO = [
     sinopsis: "Después de derrotar por accidente a su eterno adversario Metro Man, el supervillano más brillante de Metro City cae en una crisis de propósito y decide crear un nuevo héroe que resulta aún más peligroso."
   },
   {
-    id: 20,
+    id: 22,
     titulo: "Las Crónicas de Narnia",
     tipo: "Película",
     genero: "Fantasía",
@@ -280,7 +308,7 @@ const CATALOGO_CONTENIDO = [
     sinopsis: "Durante los bombardeos de la Segunda Guerra Mundial, cuatro hermanos son evacuados a una antigua residencia rural donde descubren un armario que conduce al reino invernal de Narnia."
   },
   {
-    id: 21,
+    id: 23,
     titulo: "Jujutsu Kaisen",
     tipo: "Serie",
     genero: "Animación",
@@ -294,7 +322,7 @@ const CATALOGO_CONTENIDO = [
     sinopsis: "Yuji Itadori ingresa a una organización secreta de hechiceros en Tokio tras ingerir un objeto maldito de grado especial para salvar a sus compañeros, convirtiéndose en el recipiente de Ryomen Sukuna."
   },
   {
-    id: 22,
+    id: 24,
     titulo: "Kaguya-sama: Love Is War",
     tipo: "Serie",
     genero: "Comedia",
@@ -308,7 +336,7 @@ const CATALOGO_CONTENIDO = [
     sinopsis: "En la prestigiosa Academia Shuchiin, el presidente del consejo estudiantil Miyuki Shirogane y la vicepresidenta Kaguya Shinomiya libran duelos de ingenio diarios para obligar al otro a confesar sus sentimientos primero."
   },
   {
-    id: 23,
+    id: 25,
     titulo: "Blue Box",
     tipo: "Serie",
     genero: "Animación",
@@ -322,7 +350,7 @@ const CATALOGO_CONTENIDO = [
     sinopsis: "Taiki Inomata, integrante del equipo escolar de bádminton, admira desde lejos a Chinatsu Kano, la estrella del equipo femenino de baloncesto, hasta que circunstancias familiares inesperadas los llevan a compartir el mismo techo."
   },
   {
-    id: 24,
+    id: 26,
     titulo: "Mushoku Tensei",
     tipo: "Serie",
     genero: "Fantasía",
@@ -336,7 +364,7 @@ const CATALOGO_CONTENIDO = [
     sinopsis: "Un hombre solitario renace en un continente dominado por la espada y la hechicería bajo el nombre de Rudeus Greyrat, conservando sus recuerdos previos y decidido a vivir su nueva existencia con plenitud."
   },
   {
-    id: 25,
+    id: 27,
     titulo: "Re:Zero",
     tipo: "Serie",
     genero: "Fantasía",
@@ -350,7 +378,7 @@ const CATALOGO_CONTENIDO = [
     sinopsis: "Transportado súbitamente a un reino de fantasía, Subaru Natsuki descubre que posee la capacidad de regresar en el tiempo cada vez que muere, soportando el peso psicológico de alterar un destino implacable."
   },
   {
-    id: 26,
+    id: 28,
     titulo: "Tensei Shitara Slime Datta Ken",
     tipo: "Serie",
     genero: "Fantasía",
@@ -364,7 +392,7 @@ const CATALOGO_CONTENIDO = [
     sinopsis: "El oficinista Satoru Mikami reencarna en un mundo alternativo como una criatura gelatinosa dotada de habilidades de absorción únicas, fundando una nación pacífica que reúne a diversas especies bajo el nombre de Rimuru Tempest."
   },
   {
-    id: 27,
+    id: 29,
     titulo: "Tokyo Revengers",
     tipo: "Serie",
     genero: "Acción",
@@ -378,7 +406,7 @@ const CATALOGO_CONTENIDO = [
     sinopsis: "Al enterarse de que su antigua pareja de secundaria fue asesinada por la peligrosa organización Tokyo Manji, Takemichi Hanagaki retrocede doce años en el tiempo para infiltrarse en la pandilla y evitar la tragedia."
   },
   {
-    id: 28,
+    id: 30,
     titulo: "Kokoro Connect",
     tipo: "Serie",
     genero: "Drama psicológico",
@@ -392,7 +420,7 @@ const CATALOGO_CONTENIDO = [
     sinopsis: "Cinco miembros del Club de Investigación Cultural de la preparatoria Yamaboshi comienzan a experimentar fenómenos inexplicables como el intercambio repentino de cuerpos y la transmisión involuntaria de pensamientos."
   },
   {
-    id: 29,
+    id: 31,
     titulo: "¿Qué pasó ayer?",
     tipo: "Película",
     genero: "Comedia",
@@ -406,7 +434,7 @@ const CATALOGO_CONTENIDO = [
     sinopsis: "Tres amigos despiertan en una suite destrozada de Las Vegas tras una despedida de soltero sin ningún recuerdo de la noche anterior y con el novio desaparecido a pocas horas de la ceremonia."
   },
   {
-    id: 30,
+    id: 32,
     titulo: "¿Y dónde están las rubias?",
     tipo: "Película",
     genero: "Comedia",
@@ -420,7 +448,7 @@ const CATALOGO_CONTENIDO = [
     sinopsis: "Dos agentes del FBI en desgracia deciden hacerse pasar por dos jóvenes herederas de la alta sociedad en los Hamptons para desarticular un plan de secuestro y recuperar su prestigio dentro de la agencia."
   },
   {
-    id: 31,
+    id: 33,
     titulo: "Son como niños",
     tipo: "Película",
     genero: "Comedia",
@@ -434,7 +462,7 @@ const CATALOGO_CONTENIDO = [
     sinopsis: "Treinta años después de graduarse, cinco antiguos compañeros del equipo escolar de baloncesto se reúnen con sus familias en una casa junto al lago para rendir homenaje a su fallecido entrenador."
   },
   {
-    id: 32,
+    id: 34,
     titulo: "Mi Abuela es un Peligro",
     tipo: "Película",
     genero: "Comedia",
@@ -448,7 +476,7 @@ const CATALOGO_CONTENIDO = [
     sinopsis: "El agente encubierto del FBI Malcolm Turner, experto en caracterizaciones, adopta la identidad de una abuela sureña de carácter firme para vigilar a la exnovia de un peligroso asaltante de bancos prófugo."
   },
   {
-    id: 33,
+    id: 35,
     titulo: "La Fiesta de las Salchichas",
     tipo: "Película",
     genero: "Comedia",
