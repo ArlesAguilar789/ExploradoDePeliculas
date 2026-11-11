@@ -13,7 +13,7 @@
   <div id="app">
     <header class="site-header">
       <div class="header-inner">
-        <a href="#" class="brand-group">
+        <a href="#" class="brand-group" @click.prevent="limpiarBusqueda">
           <span class="brand-mark">
             <span class="brand-indicator"></span>
             <span class="brand-title">CineSpot</span>
@@ -33,7 +33,7 @@
     </header>
 
     <main class="main-container">
-      <section class="hero-editorial" v-if="contenidoDestacado">
+      <section class="hero-editorial" v-if="contenidoDestacado && !busquedaActiva">
         <div class="hero-copy">
           <div>
             <span class="hero-kicker">Selección de archivo</span>
@@ -75,37 +75,47 @@
       </section>
 
       <section aria-labelledby="catalogo-heading">
+        <search-bar
+          v-model="terminoBusqueda"
+          :total-resultados="catalogoFiltrado.length"
+          :total-catalogo="catalogo.length"
+          @limpiar="limpiarBusqueda"
+        ></search-bar>
+
         <div class="section-header">
           <div class="section-title-group">
-            <span class="section-eyebrow">Índice general</span>
-            <h2 id="catalogo-heading" class="section-title">Acervo completo</h2>
+            <span class="section-eyebrow">
+              {{ busquedaActiva ? 'Resultados de búsqueda' : 'Índice general' }}
+            </span>
+            <h2 id="catalogo-heading" class="section-title">
+              {{ busquedaActiva ? 'Coincidencias para "' + terminoBusqueda.trim() + '"' : 'Acervo completo' }}
+            </h2>
           </div>
-          <span class="section-count">{{ catalogo.length }} títulos registrados</span>
+          <span class="section-count">
+            {{ catalogoFiltrado.length }} {{ catalogoFiltrado.length === 1 ? 'título disponible' : 'títulos disponibles' }}
+          </span>
         </div>
 
-        <div class="catalog-grid">
-          <article
-            v-for="item in catalogo"
+        <div class="catalog-grid" v-if="catalogoFiltrado.length > 0">
+          <media-card
+            v-for="item in catalogoFiltrado"
             :key="item.id"
-            class="media-card"
+            :item="item"
+          ></media-card>
+        </div>
+
+        <div class="empty-catalog-state" v-else>
+          <h3 class="empty-state-title">Sin coincidencias en el catálogo</h3>
+          <p class="empty-state-text">
+            No se encontraron películas ni series que coincidan con "{{ terminoBusqueda.trim() }}". Intenta con otro título o nombre de director.
+          </p>
+          <button
+            type="button"
+            class="reset-action-btn"
+            @click="limpiarBusqueda"
           >
-            <div class="poster-frame">
-              <img
-                :src="item.imagen"
-                :alt="item.titulo"
-                class="poster-image"
-                loading="lazy"
-              >
-              <span class="poster-badge">{{ item.tipo }}</span>
-            </div>
-            <div class="card-body">
-              <h3 class="card-title">{{ item.titulo }}</h3>
-              <div class="card-meta">
-                <span class="card-genre">{{ item.genero }}</span>
-                <span class="card-year">{{ item.anio }}</span>
-              </div>
-            </div>
-          </article>
+            Restablecer búsqueda
+          </button>
         </div>
       </section>
     </main>
@@ -120,6 +130,8 @@
 
   <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
   <script src="src/data/catalogo.js"></script>
+  <script src="src/components/MediaCard.js"></script>
+  <script src="src/components/SearchBar.js"></script>
   <script src="src/app.js"></script>
 </body>
 </html>
