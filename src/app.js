@@ -13,11 +13,15 @@ function normalizarTexto(texto) {
 const app = createApp({
   components: {
     MediaCard,
-    SearchBar
+    SearchBar,
+    FilterToolbar
   },
   setup() {
     const catalogo = ref(CATALOGO_CONTENIDO);
     const terminoBusqueda = ref("");
+    const tipoActivo = ref("Todos");
+    const generoActivo = ref("Todos");
+    const ordenActivo = ref("archivo");
     const idDestacadoActivo = ref(1);
 
     const obrasDestacadas = computed(() => {
@@ -36,13 +40,80 @@ const app = createApp({
       return normalizarTexto(terminoBusqueda.value).length > 0;
     });
 
+    const hayFiltrosActivos = computed(() => {
+      return (
+        busquedaActiva.value ||
+        tipoActivo.value !== "Todos" ||
+        generoActivo.value !== "Todos" ||
+        ordenActivo.value !== "archivo"
+      );
+    });
+
+    const conteoPorTipo = computed(() => {
+      const consulta = normalizarTexto(terminoBusqueda.value);
+      const base = catalogo.value.filter((item) => {
+        const coincideGenero =
+          generoActivo.value === "Todos" || item.genero === generoActivo.value;
+        if (!coincideGenero) return false;
+        if (!consulta) return true;
+        return (
+          normalizarTexto(item.titulo).includes(consulta) ||
+          normalizarTexto(item.director).includes(consulta) ||
+          normalizarTexto(item.genero).includes(consulta)
+        );
+      });
+
+      return {
+        todos: base.length,
+        peliculas: base.filter((item) => item.tipo === "Película").length,
+        series: base.filter((item) => item.tipo === "Serie").length
+      };
+    });
+
+    const generosDisponibles = computed(() => {
+      const consulta = normalizarTexto(terminoBusqueda.value);
+      const basePorTipoYBusqueda = catalogo.value.filter((item) => {
+        const coincideTipo =
+          tipoActivo.value === "Todos" || item.tipo === tipoActivo.value;
+        if (!coincideTipo) return false;
+        if (!consulta) return true;
+        return (
+          normalizarTexto(item.titulo).includes(consulta) ||
+          normalizarTexto(item.director).includes(consulta) ||
+          normalizarTexto(item.genero).includes(consulta)
+        );
+      });
+
+      const mapaConteo = new Map();
+      catalogo.value.forEach((item) => {
+        if (!mapaConteo.has(item.genero)) {
+          mapaConteo.set(item.genero, 0);
+        }
+      });
+
+      basePorTipoYBusqueda.forEach((item) => {
+        mapaConteo.set(item.genero, (mapaConteo.get(item.genero) || 0) + 1);
+      });
+
+      return Array.from(mapaConteo.entries())
+        .map(([nombre, cantidad]) => ({ nombre, cantidad }))
+        .sort((a, b) => a.nombre.localeCompare(b.nombre, "es"));
+    });
+
     const catalogoFiltrado = computed(() => {
       const consulta = normalizarTexto(terminoBusqueda.value);
-      if (!consulta) {
-        return catalogo.value;
-      }
 
-      return catalogo.value.filter((item) => {
+      const filtrados = catalogo.value.filter((item) => {
+        const coincideTipo =
+          tipoActivo.value === "Todos" || item.tipo === tipoActivo.value;
+        if (!coincideTipo) return false;
+
+        const coincideGenero =
+          generoActivo.value === "Todos" || item.genero === generoActivo.value;
+        if (!coincideGenero) return false;
+
+        if (!consulta) return true;
+
         const tituloNormalizado = normalizarTexto(item.titulo);
         const directorNormalizado = normalizarTexto(item.director);
         const generoNormalizado = normalizarTexto(item.genero);
@@ -52,6 +123,42 @@ const app = createApp({
           generoNormalizado.includes(consulta)
         );
       });
+
+      const copiaOrdenada = [...filtrados];
+      if (ordenActivo.value === "calificacion") {
+        copiaOrdenada.sort(
+          (a, b) => parseFloat(b.calificacion) - parseFloat(a.calificacion)
+        );
+      } else if (ordenActivo.value === "anio-desc") {
+        copiaOrdenada.sort((a, b) => b.anio - a.anio);
+      } else if (ordenActivo.value === "anio-asc") {
+        copiaOrdenada.sort((a, b) => a.anio - b.anio);
+      } else if (ordenActivo.value === "titulo-asc") {
+        copiaOrdenada.sort((a, b) => a.titulo.localeCompare(b.titulo, "es"));
+      }
+
+      return copiaOrdenada;
+    });
+
+    const tituloSeccionActiva = computed(() => {
+      const partes = [];
+      if (tipoActivo.value === "Película") {
+        partes.push("Películas");
+      } else if (tipoActivo.value === "Serie") {
+        partes.push("Series");
+      } else {
+        partes.push("Acervo completo");
+      }
+
+      if (generoActivo.value !== "Todos") {
+        partes.push("de " + generoActivo.value.toLowerCase());
+      }
+
+      if (busquedaActiva.value) {
+        partes.push('para "' + terminoBusqueda.value.trim() + '"');
+      }
+
+      return partes.join(" ");
     });
 
     const totalPeliculas = computed(() => {
@@ -66,22 +173,56 @@ const app = createApp({
       idDestacadoActivo.value = id;
     }
 
+    function cambiarTipo(nuevoTipo) {
+      tipoActivo.value = nuevoTipo;
+    }
+
+    function cambiarGenero(nuevoGenero) {
+      if (generoActivo.value === nuevoGenero && nuevoGenero !== "Todos") {
+        generoActivo.value = "Todos";
+      } else {
+        generoActivo.value = nuevoGenero;
+      }
+    }
+
+    function cambiarOrden(nuevoOrden) {
+      ordenActivo.value = nuevoOrden;
+    }
+
     function limpiarBusqueda() {
       terminoBusqueda.value = "";
+    }
+
+    function restablecerFiltros() {
+      terminoBusqueda.value = "";
+      tipoActivo.value = "Todos";
+      generoActivo.value = "Todos";
+      ordenActivo.value = "archivo";
     }
 
     return {
       catalogo,
       terminoBusqueda,
+      tipoActivo,
+      generoActivo,
+      ordenActivo,
       idDestacadoActivo,
       obrasDestacadas,
       contenidoDestacado,
       busquedaActiva,
+      hayFiltrosActivos,
+      conteoPorTipo,
+      generosDisponibles,
       catalogoFiltrado,
+      tituloSeccionActiva,
       totalPeliculas,
       totalSeries,
       seleccionarDestacado,
-      limpiarBusqueda
+      cambiarTipo,
+      cambiarGenero,
+      cambiarOrden,
+      limpiarBusqueda,
+      restablecerFiltros
     };
   }
 });

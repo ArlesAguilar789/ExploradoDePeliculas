@@ -412,16 +412,28 @@ body {
   display: block;
 }
 
+/* Contenedor de Controles y Búsqueda */
+.catalog-controls-shell {
+  background-color: var(--bg-elevated);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.15rem;
+}
+
 /* Panel de Búsqueda */
 .search-panel {
-  margin-bottom: 2.25rem;
+  margin-bottom: 0;
 }
 
 .search-field-wrapper {
   position: relative;
   display: flex;
   align-items: center;
-  background-color: var(--bg-elevated);
+  background-color: var(--bg-primary);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-md);
   padding: 0.35rem 0.6rem 0.35rem 1.15rem;
@@ -510,6 +522,214 @@ body {
 .search-clear-btn svg {
   width: 13px;
   height: 13px;
+}
+
+/* Barra de Filtros Combinados */
+.filter-toolbar {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+  padding-top: 1.1rem;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.filter-primary-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.type-segmented-control {
+  display: inline-flex;
+  align-items: center;
+  background-color: var(--bg-primary);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 0.25rem;
+  gap: 0.25rem;
+}
+
+.type-tab-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  background: transparent;
+  color: var(--text-secondary);
+  border: 1px solid transparent;
+  border-radius: 6px;
+  padding: 0.45rem 0.95rem;
+  font-family: var(--font-sans);
+  font-size: 0.82rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: color 0.18s ease, background-color 0.18s ease, border-color 0.18s ease;
+}
+
+.type-tab-btn:hover {
+  color: var(--text-primary);
+}
+
+.type-tab-btn.is-active {
+  background-color: var(--bg-card);
+  color: var(--text-primary);
+  border-color: var(--border-strong);
+  font-weight: 600;
+}
+
+.type-tab-count {
+  font-size: 0.7rem;
+  font-variant-numeric: tabular-nums;
+  padding: 0.08rem 0.42rem;
+  border-radius: var(--radius-sm);
+  background-color: rgba(244, 240, 234, 0.06);
+  color: var(--text-muted);
+}
+
+.type-tab-btn.is-active .type-tab-count {
+  background-color: rgba(212, 163, 89, 0.16);
+  color: var(--accent-gold);
+}
+
+.filter-controls-right {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+}
+
+.sort-control {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.sort-label {
+  font-size: 0.74rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+}
+
+.sort-select-wrapper {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.sort-select {
+  appearance: none;
+  -webkit-appearance: none;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 0.42rem 2rem 0.42rem 0.75rem;
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.18s ease;
+}
+
+.sort-select:hover,
+.sort-select:focus {
+  border-color: var(--border-strong);
+}
+
+.sort-select option {
+  background-color: var(--bg-elevated);
+  color: var(--text-primary);
+}
+
+.sort-chevron {
+  position: absolute;
+  right: 0.6rem;
+  width: 14px;
+  height: 14px;
+  color: var(--text-muted);
+  pointer-events: none;
+}
+
+.clear-filters-btn {
+  background-color: rgba(217, 56, 30, 0.1);
+  color: #f0816c;
+  border: 1px solid rgba(217, 56, 30, 0.3);
+  border-radius: var(--radius-sm);
+  padding: 0.42rem 0.8rem;
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.18s ease, border-color 0.18s ease, color 0.18s ease;
+}
+
+.clear-filters-btn:hover {
+  background-color: rgba(217, 56, 30, 0.18);
+  border-color: rgba(217, 56, 30, 0.5);
+  color: var(--text-primary);
+}
+
+/* Carril de Géneros */
+.genre-rail-wrapper {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.genre-rail-label {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--text-muted);
+  padding-top: 0.42rem;
+  flex-shrink: 0;
+}
+
+.genre-pills-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.genre-pill-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  background-color: var(--bg-primary);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-subtle);
+  border-radius: 999px;
+  padding: 0.34rem 0.8rem;
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: color 0.18s ease, border-color 0.18s ease, background-color 0.18s ease;
+}
+
+.genre-pill-btn:hover {
+  color: var(--text-primary);
+  border-color: var(--border-strong);
+}
+
+.genre-pill-btn.is-active {
+  background-color: rgba(212, 163, 89, 0.14);
+  color: var(--text-primary);
+  border-color: var(--accent-gold);
+}
+
+.genre-pill-count {
+  font-size: 0.68rem;
+  font-variant-numeric: tabular-nums;
+  color: var(--text-muted);
+}
+
+.genre-pill-btn.is-active .genre-pill-count {
+  color: var(--accent-gold);
+  font-weight: 600;
 }
 
 /* Cabecera de Sección */
@@ -695,8 +915,21 @@ body {
   font-variant-numeric: tabular-nums;
 }
 
-.card-genre {
+.card-genre-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
   color: var(--text-secondary);
+  cursor: pointer;
+  text-align: left;
+  transition: color 0.18s ease;
+}
+
+.card-genre-btn:hover,
+.card-genre-btn.is-highlighted {
+  color: var(--accent-gold);
 }
 
 .card-year {
@@ -800,6 +1033,15 @@ body {
   .hero-selector-track {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+
+  .genre-rail-wrapper {
+    flex-direction: column;
+    gap: 0.55rem;
+  }
+
+  .genre-rail-label {
+    padding-top: 0;
+  }
 }
 
 @media (max-width: 640px) {
@@ -815,6 +1057,26 @@ body {
 
   .main-container {
     padding: 1.5rem 1.25rem 3.5rem;
+  }
+
+  .catalog-controls-shell {
+    padding: 1rem;
+  }
+
+  .type-segmented-control {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .type-tab-btn {
+    flex: 1;
+    justify-content: center;
+    padding: 0.45rem 0.5rem;
+  }
+
+  .filter-controls-right {
+    width: 100%;
+    justify-content: space-between;
   }
 
   .hero-selector-track {

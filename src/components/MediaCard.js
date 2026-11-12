@@ -4,8 +4,13 @@ const MediaCard = {
     item: {
       type: Object,
       required: true
+    },
+    generoActivo: {
+      type: String,
+      default: "Todos"
     }
   },
+  emits: ["filtrar-genero"],
   template: `
     <article class="media-card">
       <div class="poster-frame">
@@ -28,7 +33,15 @@ const MediaCard = {
       <div class="card-body">
         <h3 class="card-title" :title="item.titulo">{{ item.titulo }}</h3>
         <div class="card-meta">
-          <span class="card-genre">{{ item.genero }}</span>
+          <button
+            type="button"
+            class="card-genre-btn"
+            :class="{ 'is-highlighted': generoActivo === item.genero }"
+            @click.stop="$emit('filtrar-genero', item.genero)"
+            :title="'Filtrar por ' + item.genero"
+          >
+            {{ item.genero }}
+          </button>
           <span class="card-year">{{ item.anio }}</span>
         </div>
       </div>
