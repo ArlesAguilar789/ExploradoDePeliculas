@@ -11,7 +11,7 @@ const CATALOGO_CONTENIDO = [
     calificacion: "9.5",
     imagen: "Imagenes/Breaking Bad.jpg",
     destacado: true,
-    sinopsis: "Tras ser diagnosticado con cáncer pulmonar inoperante, un profesor de química de secundaria comienza a fabricar y vender metanfetamina junto a un antiguo alumno para asegurar el futuro económico de su familia, adentrándose en el mundo del crimen organizado de Albuquerque."
+    sinopsis: "¿Hasta dónde puede llegar un hombre común cuando ya no tiene nada que perder? A los cincuenta años, el brillante pero frustrado profesor de química Walter White recibe una sentencia de muerte por cáncer pulmonar. Decidido a no dejar a su familia en la ruina, utiliza su conocimiento científico para cocinar la metanfetamina más pura del mercado junto a un exalumno rebelde, despertando a un implacable capo criminal llamado Heisenberg."
   },
   {
     id: 2,
@@ -25,7 +25,7 @@ const CATALOGO_CONTENIDO = [
     calificacion: "9.6",
     imagen: "Imagenes/El Señor de los anillos.png",
     destacado: true,
-    sinopsis: "En las tierras ancestrales de la Tierra Media, dos compañeros inseparables emprenden una peligrosa travesía desde los valles élficos hasta las sombras de Mordor para destruir el Anillo Único antes de que el ojo de Sauron consuma el reino de los hombres."
+    sinopsis: "El destino de toda una era descansa en las manos de quienes menos esperan la gloria. Cuando una reliquia forjada en la oscuridad despierta el poder ancestral de Mordor, dos amigos inseparables abandonan la paz de su hogar para cruzar reinos en guerra, montañas traicioneras y ejércitos implacables con una única misión: arrojar el Anillo Único al fuego del Monte del Destino antes de que la sombra devore el mundo."
   },
   {
     id: 3,
@@ -39,7 +39,7 @@ const CATALOGO_CONTENIDO = [
     calificacion: "9.3",
     imagen: "Imagenes/El tiempo se detiene cuando estoy contigo.png",
     destacado: true,
-    sinopsis: "Bajo los cerezos en flor del campus de la Universidad Nacional de Seúl, dos estudiantes de mundos opuestos coinciden en la misma aula durante la primavera, descubriendo que cada instante compartido transforma por completo su manera de entender la vida."
+    sinopsis: "Hay miradas capaces de silenciar el ruido del mundo entero en un solo segundo. Entre los cerezos en flor de la Universidad Nacional de Seúl, dos jóvenes con pasados y temperamentos completamente distintos coinciden en el mismo salón de clases, descubriendo que el amor llega sin avisar y que un instante junto a la persona correcta puede volverse eterno."
   },
   {
     id: 4,
@@ -53,7 +53,7 @@ const CATALOGO_CONTENIDO = [
     calificacion: "9.4",
     imagen: "Imagenes/TECNM VS TECMTY.png",
     destacado: true,
-    sinopsis: "Dos instituciones históricas se enfrentan en una intensa disputa de poder, estrategia e influencia que marcó a toda una generación en el norte del país, donde la lealtad de cada bando se pone a prueba hasta las últimas consecuencias."
+    sinopsis: "Dos imperios académicos, un solo territorio y una rivalidad que salió de las aulas para convertirse en leyenda. Cuando el orgullo institucional choca con intereses de alto nivel, las facciones más poderosas del país desatan una guerra estratégica sin cuartel donde la lealtad se paga caro y nadie puede darse el lujo de retroceder."
   },
   {
     id: 5,
@@ -67,7 +67,7 @@ const CATALOGO_CONTENIDO = [
     calificacion: "9.2",
     imagen: "Imagenes/Ataque en la red.jpg",
     destacado: true,
-    sinopsis: "Desde un búnker subterráneo rodeado de monitores, un especialista en seguridad informática detecta una intrusión global que compromete infraestructuras críticas, iniciando una carrera contrarreloj donde ningún sistema es seguro y el peligro aguarda detrás de la pantalla."
+    sinopsis: "En la era digital, un solo comando de código puede poner de rodillas a una nación entera. Encerrado frente a seis monitores en la madrugada, un prodigio de la ciberseguridad descubre una brecha oculta que apunta directamente al sistema financiero global, pero al intentar rastrear al responsable se convierte en el blanco principal de una organización que controla cada cámara y cada servidor de la ciudad."
   },
   {
     id: 6,
@@ -81,7 +81,7 @@ const CATALOGO_CONTENIDO = [
     calificacion: "9.1",
     imagen: "Imagenes/Albert Y Einstein.jpg",
     destacado: false,
-    sinopsis: "Dos mentes brillantes de épocas distintas unen el dominio de la corriente eléctrica y la física relativista cuando un experimento altera el tejido del cosmos, obligándolos a colaborar para evitar el colapso dimensional."
+    sinopsis: "¿Qué ocurriría si las leyes del espacio y la energía fueran desafiadas en una misma noche? Cuando una descarga de alta tensión fractura la barrera temporal del universo, dos genios irrepetibles deben combinar la furia del electromagnetismo con los secretos de la relatividad para cerrar una anomalía cósmica antes de que la realidad misma deje de existir."
   },
   {
     id: 7,
@@ -95,7 +95,7 @@ const CATALOGO_CONTENIDO = [
     calificacion: "8.2",
     imagen: "Imagenes/Taxi Driver.jpg",
     destacado: false,
-    sinopsis: "Travis Bickle, un veterano de guerra con insomnio crónico, trabaja como taxista nocturno en las calles de Nueva York mientras el aislamiento urbano y la decadencia moral que observa alimentan su deterioro mental."
+    sinopsis: "Las calles de Nueva York cambian de rostro cuando cae la medianoche y nadie quiere mirar. Consumido por el insomnio y los fantasmas de la guerra, el solitario taxista Travis Bickle recorre cada madrugada los rincones más oscuros de la ciudad, alimentando una obsesión silenciosa por limpiar por su propia cuenta un mundo que considera podrido."
   },
   {
     id: 8,
@@ -109,7 +109,7 @@ const CATALOGO_CONTENIDO = [
     calificacion: "9.0",
     imagen: "Imagenes/Better Call Saul.jpg",
     destacado: false,
-    sinopsis: "Seis años antes de conocer a Walter White, el abogado de poca monta Jimmy McGill lucha por construir una carrera respetable en Nuevo México, en un recorrido ético que lo transforma gradualmente en el implacable defensor penal Saul Goodman."
+    sinopsis: "Nadie nace siendo el abogado de los criminales más peligrosos del desierto; uno se construye paso a paso. Antes de que existiera Saul Goodman, Jimmy McGill era un defensor de oficio con ingenio de sobra y bolsillos vacíos que buscaba la aprobación de su prestigioso hermano, hasta descubrir que jugar limpio en un sistema corrupto nunca fue una opción."
   },
   {
     id: 9,
@@ -123,7 +123,7 @@ const CATALOGO_CONTENIDO = [
     calificacion: "7.6",
     imagen: "Imagenes/American psycho.jpg",
     destacado: false,
-    sinopsis: "En el Manhattan financiero de finales de los años ochenta, Patrick Bateman, un joven ejecutivo de inversiones obsesionado con el estatus y las apariencias, oculta una doble vida violenta tras su fachada corporativa impecable."
+    sinopsis: "Detrás de un traje de diseñador, una tarjeta de presentación perfecta y una sonrisa impecable se esconde un monstruo que nadie en Wall Street se molesta en ver. Patrick Bateman lo tiene todo en el Manhattan de los años ochenta, pero cuando cae el sol su obsesión por la perfección se transforma en una vorágine de envidia y violencia fuera de control."
   },
   {
     id: 10,
@@ -137,7 +137,7 @@ const CATALOGO_CONTENIDO = [
     calificacion: "9.2",
     imagen: "Imagenes/Game of trones.jpg",
     destacado: false,
-    sinopsis: "Nueve familias nobles conspiran y combaten por el control de las tierras míticas de Poniente y el Trono de Hierro, mientras una antigua amenaza olvidada durante milenios despierta más allá del Muro norte."
+    sinopsis: "En el juego de tronos solo existen dos resultados posibles: ganar o morir. Mientras las dinastías más poderosas de Poniente se traicionan en los salones reales y desangran sus ejércitos por una corona de espadas, en el exilio renacen los dragones y más allá del hielo avanza un invierno ancestral dispuesto a borrar a todos los vivos."
   },
   {
     id: 11,
@@ -145,13 +145,13 @@ const CATALOGO_CONTENIDO = [
     tipo: "Serie",
     genero: "Ciencia ficción",
     anio: 2022,
-    duracion: "1 temporada",
+    duracion: "2 temporadas",
     director: "Hiroyuki Imaishi",
     clasificacion: "TV-MA",
     calificacion: "8.3",
     imagen: "Imagenes/Cyberpunk Edgerunners.png",
     destacado: false,
-    sinopsis: "En una metrópoli distópica dominada por megacorporaciones y modificaciones cibernéticas, un joven de la calle intenta sobrevivir tras perderlo todo convirtiéndose en un mercenario fuera de la ley conocido como edgerunner."
+    sinopsis: "En Night City no te recuerdan por cómo vives, sino por cómo mueres. Tras perderlo todo en un instante por culpa de la avaricia corporativa, el joven David Martinez decide implantarse un peligroso artefacto militar en la columna vertebral y sumergirse en el submundo mercenario, arriesgando su propia cordura a cambio de alcanzar la cima junto a la enigmática Lucy."
   },
   {
     id: 12,
@@ -165,7 +165,7 @@ const CATALOGO_CONTENIDO = [
     calificacion: "8.4",
     imagen: "Imagenes/The Joker.jpg",
     destacado: false,
-    sinopsis: "Arthur Fleck, un comediante con problemas neurológicos ignorado por una Ciudad Gótica fracturada y hostil, inicia una espiral descendente que desencadena una revuelta social sin precedentes."
+    sinopsis: "¿Cuánto maltrato puede soportar un hombre invisible antes de que su risa se convierta en el grito de toda una ciudad en llamas? Arthur Fleck solo quería hacer reír a los demás en una Ciudad Gótica fría y decadente, pero cada golpe y cada humillación lo empujan a abandonar su antigua identidad para dar paso al símbolo del caos absoluto."
   },
   {
     id: 13,
@@ -179,7 +179,7 @@ const CATALOGO_CONTENIDO = [
     calificacion: "8.5",
     imagen: "Imagenes/hannibal.jpg",
     destacado: false,
-    sinopsis: "El perfilador criminal del FBI Will Graham, dotado de una empatía extrema para reconstruir escenas del crimen, colabora con el prestigioso psiquiatra forense Hannibal Lecter sin sospechar que su consultor es un asesino metódico."
+    sinopsis: "¿Qué pasa cuando el único hombre capaz de atrapar a los asesinos más retorcidos busca consuelo en el depredador más peligroso de todos? El investigador Will Graham posee el don y la maldición de pensar como los psicópatas que persigue, por lo que el FBI lo pone en manos del refinado psiquiatra Hannibal Lecter, iniciando un hipnótico juego del gato y el ratón."
   },
   {
     id: 14,
@@ -187,13 +187,13 @@ const CATALOGO_CONTENIDO = [
     tipo: "Serie",
     genero: "Drama criminal",
     anio: 2006,
-    duracion: "8 temporadas",
+    duracion: "9 temporadas",
     director: "James Manos Jr.",
     clasificacion: "TV-MA",
     calificacion: "8.6",
     imagen: "Imagenes/Dexter (serie del asesino).jpg",
     destacado: false,
-    sinopsis: "De día, Dexter Morgan trabaja como analista forense de patrones de sangre para la policía metropolitana de Miami; de noche, canaliza sus impulsos homicidas persiguiendo a criminales que han logrado evadir la justicia."
+    sinopsis: "Para atrapar a un monstruo que burló a la ley, a veces hace falta otro monstruo aún más meticuloso. Bajo el sol de Miami, Dexter Morgan es el forense más amable del departamento de policía, pero cuando termina su turno obedece un estricto código secreto: cazar en la oscuridad a los asesinos que jamás pisarían una celda."
   },
   {
     id: 15,
@@ -201,13 +201,13 @@ const CATALOGO_CONTENIDO = [
     tipo: "Serie",
     genero: "Ciencia ficción",
     anio: 1995,
-    duracion: "1 temporada",
+    duracion: "2 temporadas",
     director: "Hideaki Anno",
     clasificacion: "TV-14",
     calificacion: "8.5",
     imagen: "Imagenes/Evangelion.jpg",
     destacado: false,
-    sinopsis: "Quince años después de un cataclismo global, el adolescente Shinji Ikari es reclutado en Tokio-3 por la organización NERV para pilotar una unidad biomecánica gigante y defender a la humanidad de entidades enigmáticas."
+    sinopsis: "Salvar a la humanidad es una carga demasiado pesada para un adolescente de catorce años que apenas puede lidiar con el abandono de su propio padre. En una Tierra herida por un cataclismo apocalíptico, Shinji Ikari es obligado a subir a la cabina de un coloso biomecánico para enfrentar a criaturas incomprensibles mientras su mente se quiebra desde adentro."
   },
   {
     id: 16,
@@ -221,7 +221,7 @@ const CATALOGO_CONTENIDO = [
     calificacion: "8.4",
     imagen: "Imagenes/La ley de los audaces.png",
     destacado: false,
-    sinopsis: "Harvey Specter, uno de los abogados corporativos más influyentes de Nueva York, contrata a Mike Ross, un joven con memoria fotográfica que nunca asistió a la facultad de derecho, manteniendo el secreto frente a toda la firma."
+    sinopsis: "En los rascacielos de Manhattan, los juicios no se ganan en el estrado, sino mucho antes de entrar a la sala. Cuando el implacable abogado Harvey Specter cruza caminos con Mike Ross, un joven fugitivo con memoria fotográfica capaz de recitar cada código legal sin haber pisado jamás la universidad, ambos sellan un pacto multimillonario donde un solo descuido significa la prisión."
   },
   {
     id: 17,
@@ -235,7 +235,7 @@ const CATALOGO_CONTENIDO = [
     calificacion: "8.2",
     imagen: "Imagenes/the mentalist.jpg",
     destacado: false,
-    sinopsis: "Patrick Jane, un antiguo médium televisivo con una extraordinaria capacidad de observación y deducción, asesora al Buró de Investigación de California en casos de homicidio mientras rastrea al asesino en serie Red John."
+    sinopsis: "No existen los poderes psíquicos, pero sí los ojos que leen cada microexpresión, cada mentira y cada nervio oculto. Tras perder a su familia a manos del escurridizo asesino en serie Red John, el carismático consultor Patrick Jane pone su prodigiosa mente deductiva al servicio de la policía de California con un único propósito final: encontrarlo y cobrar venganza."
   },
   {
     id: 18,
@@ -249,7 +249,7 @@ const CATALOGO_CONTENIDO = [
     calificacion: "7.2",
     imagen: "Imagenes/mision imposible.jpg",
     destacado: false,
-    sinopsis: "Tras una operación fallida en Praga donde su equipo es eliminado, el agente especial Ethan Hunt descubre que ha sido incriminado como traidor y debe infiltrarse en la sede central de la CIA para descubrir al verdadero infiltrado."
+    sinopsis: "Cuando tu propia agencia te declara traidor, la única salida es hacer lo que nadie más se atreve a intentar. Después de una emboscada mortal en las calles de Praga que aniquila a todo su escuadrón, el agente Ethan Hunt debe infiltrarse en la bóveda más vigilada de la CIA colgando de un cable en absoluto silencio para limpiar su nombre."
   },
   {
     id: 19,
@@ -263,7 +263,7 @@ const CATALOGO_CONTENIDO = [
     calificacion: "7.8",
     imagen: "Imagenes/Residen Evil Noche 0.jpg",
     destacado: false,
-    sinopsis: "En las afueras de Raccoon City, una llamada de auxilio en medio de la noche arrastra a un sobreviviente al epicentro de un brote biológico clandestino donde cada habitación oculta el origen del experimento."
+    sinopsis: "El teléfono suena a mitad de la noche en las afueras de Raccoon City, pero del otro lado de la línea ya no queda nadie humano. Atrapado en el epicentro del primer brote biológico de la corporación Umbrella, un hombre armado apenas con su instinto descubre que el verdadero horror no está tratando de entrar a la casa, sino que ya está adentro."
   },
   {
     id: 20,
@@ -277,7 +277,7 @@ const CATALOGO_CONTENIDO = [
     calificacion: "8.1",
     imagen: "Imagenes/the walking death.jpg",
     destacado: false,
-    sinopsis: "El oficial de policía Rick Grimes despierta de un coma para encontrar una civilización devastada por una epidemia apocalíptica y lidera a un grupo de sobrevivientes en la búsqueda de refugio."
+    sinopsis: "Imagina despertar en un hospital en silencio total y descubrir que la civilización cayó mientras dormías. El oficial Rick Grimes sale a las calles devastadas para buscar a su esposa e hijo en un mundo dominado por los muertos, donde pronto aprenderá que los vivos son mucho más peligrosos cuando desaparecen las leyes."
   },
   {
     id: 21,
@@ -291,7 +291,7 @@ const CATALOGO_CONTENIDO = [
     calificacion: "5.1",
     imagen: "Imagenes/leatherface.jpg",
     destacado: false,
-    sinopsis: "Cuatro internos violentos escapan de un hospital psiquiátrico en Texas llevando como rehén a una joven enfermera, perseguidos por un comisario decidido a vengarse mientras uno de los fugitivos desciende a la locura."
+    sinopsis: "Detrás de la máscara más temida en la historia del cine de terror hubo alguna vez un joven al que el mundo terminó de romper. Tras una violenta fuga de un hospital psiquiátrico en las carreteras polvorientas de Texas, una cacería despiadada revela cómo nació la pesadilla de la motosierra de la familia Sawyer."
   },
   {
     id: 22,
@@ -305,7 +305,7 @@ const CATALOGO_CONTENIDO = [
     calificacion: "7.3",
     imagen: "Imagenes/rango.jpg",
     destacado: false,
-    sinopsis: "Un camaleón doméstico con aspiraciones teatrales termina accidentalmente en el árido pueblo fronterizo de Polvo, en el desierto de Mojave, donde asume el cargo de comisario y debe resolver una conspiración por el agua."
+    sinopsis: "¿Puede un impostor convertirse en el héroe que todo un pueblo desesperado necesita? Acostumbrado a actuar frente a los juguetes de su terrario, un camaleón cae en mitad del abrasador desierto de Mojave y termina fingiendo ser un pistolero implacable, hasta que lo nombran comisario y debe enfrentar a los verdaderos forajidos del oeste."
   },
   {
     id: 23,
@@ -319,7 +319,7 @@ const CATALOGO_CONTENIDO = [
     calificacion: "7.3",
     imagen: "Imagenes/megamente.jpg",
     destacado: false,
-    sinopsis: "Después de derrotar por accidente a su eterno adversario Metro Man, el supervillano más brillante de Metro City cae en una crisis de propósito y decide crear un nuevo héroe que resulta aún más peligroso."
+    sinopsis: "¿Qué hace el supervillano más brillante del mundo el día que por fin logra derrotar a su eterno enemigo? Dueño absoluto de Metro City pero hundido en el aburrimiento por no tener contra quién pelear, Megamente decide fabricar en su laboratorio a un nuevo rival, sin imaginar que su creación decidirá destruir la ciudad en lugar de protegerla."
   },
   {
     id: 24,
@@ -333,7 +333,7 @@ const CATALOGO_CONTENIDO = [
     calificacion: "6.9",
     imagen: "Imagenes/Narnia.jpg",
     destacado: false,
-    sinopsis: "Durante los bombardeos de la Segunda Guerra Mundial, cuatro hermanos son evacuados a una antigua residencia rural donde descubren un armario que conduce al reino invernal de Narnia."
+    sinopsis: "Al abrir la puerta de un viejo ropero de madera, cuatro hermanos dejan atrás una Londres bajo las bombas para pisar un bosque cubierto por cien años de invierno eterno. En el reino de Narnia, una antigua profecía anuncia que su llegada despertará al gran león Aslan y pondrá fin al reinado helado de la Bruja Blanca."
   },
   {
     id: 25,
@@ -341,13 +341,13 @@ const CATALOGO_CONTENIDO = [
     tipo: "Serie",
     genero: "Animación",
     anio: 2020,
-    duracion: "2 temporadas",
+    duracion: "3 temporadas",
     director: "Sunghoo Park y Shota Goshozono",
     clasificacion: "TV-MA",
     calificacion: "8.5",
     imagen: "Imagenes/jujutsu kaisen.png",
     destacado: false,
-    sinopsis: "Yuji Itadori ingresa a una organización secreta de hechiceros en Tokio tras ingerir un objeto maldito de grado especial para salvar a sus compañeros, convirtiéndose en el recipiente de Ryomen Sukuna."
+    sinopsis: "Para salvar la vida de sus amigos en una noche de terror, Yuji Itadori toma una decisión impensable: tragar el dedo maldito de Ryomen Sukuna, el rey de las maldiciones más letal de la historia. Condenado a muerte por los altos mandos de la hechicería pero entrenado por el invencible Satoru Gojo, deberá compartir su propio cuerpo con un demonio que espera el menor descuido para tomar el control."
   },
   {
     id: 26,
@@ -355,13 +355,13 @@ const CATALOGO_CONTENIDO = [
     tipo: "Serie",
     genero: "Comedia",
     anio: 2019,
-    duracion: "3 temporadas",
+    duracion: "4 temporadas",
     director: "Mamoru Hatakeyama",
     clasificacion: "TV-14",
     calificacion: "8.5",
     imagen: "Imagenes/kaguya sama.png",
     destacado: false,
-    sinopsis: "En la prestigiosa Academia Shuchiin, el presidente del consejo estudiantil Miyuki Shirogane y la vicepresidenta Kaguya Shinomiya libran duelos de ingenio diarios para obligar al otro a confesar sus sentimientos primero."
+    sinopsis: "¿Qué pasa si dos genios se encuentran entre sí y se enamoran, pero su orgullo es tan grande que ninguno acepta dar el primer paso? Para Miyuki Shirogane y Kaguya Shinomiya, confesar sus sentimientos equivale a rendirse, por lo que transforman el consejo estudiantil en un campo de batalla psicológico donde cada conversación cotidiana es una trampa maestra para hacer caer al otro."
   },
   {
     id: 27,
@@ -369,13 +369,13 @@ const CATALOGO_CONTENIDO = [
     tipo: "Serie",
     genero: "Animación",
     anio: 2024,
-    duracion: "1 temporada",
+    duracion: "2 temporadas",
     director: "Yuichiro Yano",
     clasificacion: "TV-PG",
     calificacion: "8.2",
     imagen: "Imagenes/Blue box.png",
     destacado: false,
-    sinopsis: "Taiki Inomata, integrante del equipo escolar de bádminton, admira desde lejos a Chinatsu Kano, la estrella del equipo femenino de baloncesto, hasta que circunstancias familiares inesperadas los llevan a compartir el mismo techo."
+    sinopsis: "Cada mañana antes de que suene el timbre, el gimnasio escolar guarda el eco de dos sueños que laten al mismo ritmo. Taiki Inomata entrena sin descanso con su raqueta de bádminton mientras admira en silencio a Chinatsu Kano, la estrella del baloncesto femenino, hasta que un giro inesperado del destino lleva a la chica que tanto admira a mudarse bajo su mismo techo."
   },
   {
     id: 28,
@@ -383,13 +383,13 @@ const CATALOGO_CONTENIDO = [
     tipo: "Serie",
     genero: "Fantasía",
     anio: 2021,
-    duracion: "2 temporadas",
+    duracion: "3 temporadas",
     director: "Manabu Okamoto",
     clasificacion: "TV-MA",
     calificacion: "8.3",
     imagen: "Imagenes/Mushoku Tensei.jpg",
     destacado: false,
-    sinopsis: "Un hombre solitario renace en un continente dominado por la espada y la hechicería bajo el nombre de Rudeus Greyrat, conservando sus recuerdos previos y decidido a vivir su nueva existencia con plenitud."
+    sinopsis: "Si la vida te diera la oportunidad de volver a nacer desde cero conservando cada recuerdo de tus fracasos pasados, ¿cómo elegirías vivir esta vez? Tras morir en el anonimato, un hombre despierta en la cuna de un mundo de magia y espadas bajo el nombre de Rudeus Greyrat, jurando superar sus antiguos miedos y escribir una historia de la que jamás vuelva a arrepentirse."
   },
   {
     id: 29,
@@ -397,13 +397,13 @@ const CATALOGO_CONTENIDO = [
     tipo: "Serie",
     genero: "Fantasía",
     anio: 2016,
-    duracion: "3 temporadas",
+    duracion: "4 temporadas",
     director: "Masaharu Watanabe",
     clasificacion: "TV-MA",
     calificacion: "8.1",
     imagen: "Imagenes/RE Zero.jpg",
     destacado: false,
-    sinopsis: "Transportado súbitamente a un reino de fantasía, Subaru Natsuki descubre que posee la capacidad de regresar en el tiempo cada vez que muere, soportando el peso psicológico de alterar un destino implacable."
+    sinopsis: "Morir una vez es una tragedia; morir decenas de veces recordando cada segundo de dolor para salvar a quienes amas es una condena. Arrastrado sin previo aviso a un reino de fantasía, Subaru Natsuki descubre que su único poder consiste en retroceder en el tiempo tras cada muerte, enfrentando conspiraciones imposibles donde nadie más recuerda lo que él ya vivió."
   },
   {
     id: 30,
@@ -411,13 +411,13 @@ const CATALOGO_CONTENIDO = [
     tipo: "Serie",
     genero: "Fantasía",
     anio: 2018,
-    duracion: "3 temporadas",
+    duracion: "4 temporadas",
     director: "Yasuhito Kikuchi",
     clasificacion: "TV-14",
     calificacion: "8.1",
     imagen: "Imagenes/Tensei Shitara Salime Datta Ken.jpg",
     destacado: false,
-    sinopsis: "El oficinista Satoru Mikami reencarna en un mundo alternativo como una criatura gelatinosa dotada de habilidades de absorción únicas, fundando una nación pacífica que reúne a diversas especies bajo el nombre de Rimuru Tempest."
+    sinopsis: "Nadie espera que la criatura más débil del bosque termine convirtiéndose en el soberano que haga temblar a los reyes y señores demonio. Tras perder la vida en Tokio, Satoru Mikami despierta en una caverna mágica convertido en un pequeño slime azul, pero gracias a una habilidad única capaz de absorber cualquier poder, levanta desde la nada una nación legendaria."
   },
   {
     id: 31,
@@ -425,13 +425,13 @@ const CATALOGO_CONTENIDO = [
     tipo: "Serie",
     genero: "Acción",
     anio: 2021,
-    duracion: "3 temporadas",
+    duracion: "4 temporadas",
     director: "Koichi Hatsumi",
     clasificacion: "TV-MA",
     calificacion: "7.7",
     imagen: "Imagenes/tokyo revengers.png",
     destacado: false,
-    sinopsis: "Al enterarse de que su antigua pareja de secundaria fue asesinada por la peligrosa organización Tokyo Manji, Takemichi Hanagaki retrocede doce años en el tiempo para infiltrarse en la pandilla y evitar la tragedia."
+    sinopsis: "Si pudieras regresar doce años al pasado para evitar la muerte de la única persona que creyó en ti, ¿tendrías el valor de enfrentar a la pandilla más peligrosa de Tokio? Al caer a las vías del tren, Takemichi Hanagaki despierta en sus días de secundaria y decide infiltrarse en las filas de la Tokyo Manji para cambiar un futuro manchado de sangre."
   },
   {
     id: 32,
@@ -439,13 +439,13 @@ const CATALOGO_CONTENIDO = [
     tipo: "Serie",
     genero: "Drama psicológico",
     anio: 2012,
-    duracion: "1 temporada",
+    duracion: "2 temporadas",
     director: "Shin Onuma",
     clasificacion: "TV-14",
     calificacion: "7.7",
     imagen: "Imagenes/Kokoro Connect.jpg",
     destacado: false,
-    sinopsis: "Cinco miembros del Club de Investigación Cultural de la preparatoria Yamaboshi comienzan a experimentar fenómenos inexplicables como el intercambio repentino de cuerpos y la transmisión involuntaria de pensamientos."
+    sinopsis: "¿Qué quedaría de tu amistad si tus compañeros pudieran escuchar tus pensamientos más ocultos o despertar dentro de tu propio cuerpo sin previo aviso? Cinco estudiantes de preparatoria son sometidos a los experimentos de una entidad misteriosa que derriba todas sus máscaras, obligándolos a confrontar las verdades que jamás se atrevieron a decir en voz alta."
   },
   {
     id: 33,
@@ -459,7 +459,7 @@ const CATALOGO_CONTENIDO = [
     calificacion: "7.7",
     imagen: "Imagenes/Que paso ayer.jpg",
     destacado: false,
-    sinopsis: "Tres amigos despiertan en una suite destrozada de Las Vegas tras una despedida de soltero sin ningún recuerdo de la noche anterior y con el novio desaparecido a pocas horas de la ceremonia."
+    sinopsis: "Hay un tigre en el baño, un bebé desconocido en el armario, a uno le falta un diente y el novio que se casa en menos de cuarenta horas ha desaparecido sin dejar rastro. Tres amigos despiertan en una suite de Las Vegas con la memoria en blanco y deben reconstruir pista por pista la noche más salvaje e inexplicable de sus vidas."
   },
   {
     id: 34,
@@ -473,7 +473,7 @@ const CATALOGO_CONTENIDO = [
     calificacion: "5.8",
     imagen: "Imagenes/y donde estan las rubias.jpg",
     destacado: false,
-    sinopsis: "Dos agentes del FBI en desgracia deciden hacerse pasar por dos jóvenes herederas de la alta sociedad en los Hamptons para desarticular un plan de secuestro y recuperar su prestigio dentro de la agencia."
+    sinopsis: "A punto de ser despedidos del FBI tras arruinar un operativo antidrogas, los hermanos Marcus y Kevin Copeland reciben una última misión como escoltas de dos jóvenes millonarias. Cuando un accidente menor deja a las herederas fuera de circulación, ambos agentes toman la decisión más absurda de sus carreras: transformarse de pies a cabeza en ellas e infiltrarse en la alta sociedad de los Hamptons."
   },
   {
     id: 35,
@@ -487,7 +487,7 @@ const CATALOGO_CONTENIDO = [
     calificacion: "6.0",
     imagen: "Imagenes/Son como niños.jpg",
     destacado: false,
-    sinopsis: "Treinta años después de graduarse, cinco antiguos compañeros del equipo escolar de baloncesto se reúnen con sus familias en una casa junto al lago para rendir homenaje a su fallecido entrenador."
+    sinopsis: "Los años pasan, las responsabilidades crecen, pero basta un fin de semana frente al lago con los amigos de la infancia para descubrir que en el fondo nadie ha madurado ni un poco. Cinco antiguos campeones escolares de baloncesto reúnen a sus familias bajo el mismo techo en unas vacaciones llenas de bromas pesadas, viejas rivalidades y segundas oportunidades."
   },
   {
     id: 36,
@@ -501,7 +501,7 @@ const CATALOGO_CONTENIDO = [
     calificacion: "5.2",
     imagen: "Imagenes/BigMama.jpg",
     destacado: false,
-    sinopsis: "El agente encubierto del FBI Malcolm Turner, experto en caracterizaciones, adopta la identidad de una abuela sureña de carácter firme para vigilar a la exnovia de un peligroso asaltante de bancos prófugo."
+    sinopsis: "Para capturar al ladrón de bancos más buscado del país, el agente del FBI Malcolm Turner está dispuesto a meterse literalmente en la piel de cualquiera. Cuando la exnovia del fugitivo busca refugio en la casa de su abuela sureña y la anciana sale inesperadamente de viaje, Malcolm recurre al disfraz más extremo para mantener la fachada sin ser descubierto."
   },
   {
     id: 37,
@@ -515,6 +515,6 @@ const CATALOGO_CONTENIDO = [
     calificacion: "6.1",
     imagen: "Imagenes/La fiesta de las salchichas.jpg",
     destacado: false,
-    sinopsis: "Dentro de un supermercado, los productos alimenticios aguardan ser elegidos por los compradores creyendo que irán al paraíso, hasta que una salchicha descubre la verdad sobre lo que ocurre fuera de las puertas."
+    sinopsis: "En los pasillos del supermercado todos cantan esperando el momento sagrado de ser elegidos por los humanos para viajar al Más Allá, hasta que un frasco devuelto revela la cruda verdad: afuera no existe ningún paraíso, sino una cocina. La salchicha Frank emprende una travesía desesperada entre los estantes para advertir a todos antes de la gran venta del cuatro de julio."
   }
 ];
