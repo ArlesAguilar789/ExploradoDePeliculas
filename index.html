@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Big Cinema — Archivo y Explorador Audiovisual</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="src/styles/main.css">
+</head>
+<body>
+  <div id="app">
+    <header class="site-header">
+      <div class="header-inner">
+        <a href="#" class="brand-group" @click.prevent="restablecerFiltros">
+          <span class="brand-mark">
+            <span class="brand-indicator"></span>
+            <span class="brand-title">Big Cinema</span>
+          </span>
+          <span class="brand-subtitle">Catálogo Audiovisual</span>
+        </a>
+
+        <div class="header-meta">
+          <a href="#favoritos" class="favoritos-link">Favoritos ({{ favoritos.length }})</a>
+          <span class="catalog-stat">
+            <strong>{{ totalPeliculas }}</strong> películas
+          </span>
+          <span class="catalog-stat">
+            <strong>{{ totalSeries }}</strong> series
+          </span>
+          <span class="catalog-stat catalog-stat-total">
+            <strong>{{ catalogo.length }}</strong> en archivo
+          </span>
+        </div>
+      </div>
+    </header>
+
+    <main class="main-container">
+      <section class="hero-editorial" v-if="contenidoDestacado && !busquedaActiva">
+        <div
+          class="hero-ambient-bg"
+          :style="{ backgroundImage: 'url(\'' + contenidoDestacado.imagen + '\')' }"
+        ></div>
+
+        <div class="hero-copy">
+          <div class="hero-top-group">
+            <div class="hero-meta-bar">
+              <span class="hero-kicker">Selección de archivo</span>
+              <span class="hero-pill">{{ contenidoDestacado.tipo }}</span>
+              <span class="hero-pill">{{ contenidoDestacado.clasificacion }}</span>
+              <span class="hero-pill hero-pill-gold">Calificación {{ contenidoDestacado.calificacion }}</span>
+            </div>
+
+            <div class="hero-title-row">
+              <h1 class="hero-headline">{{ contenidoDestacado.titulo }}</h1>
+              <button
+                type="button"
+                class="hero-detail-btn"
+                @click="abrirDetalle(contenidoDestacado)"
+              >
+                <span>Ver ficha técnica</span>
+              </button>
+            </div>
+
+            <p class="hero-synopsis">{{ contenidoDestacado.sinopsis }}</p>
+          </div>
+
+          <div class="hero-bottom-group">
+            <div class="hero-specs">
+              <div class="spec-item">
+                <span class="spec-label">Género principal</span>
+                <span class="spec-value">{{ contenidoDestacado.genero }}</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">Año de estreno</span>
+                <span class="spec-value">{{ contenidoDestacado.anio }}</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">Extensión</span>
+                <span class="spec-value">{{ contenidoDestacado.duracion }}</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">Dirección</span>
+                <span class="spec-value">{{ contenidoDestacado.director }}</span>
+              </div>
+            </div>
+
+            <div class="hero-selector">
+              <div class="hero-selector-header">
+                <span class="hero-selector-label">En portada principal</span>
+                <span class="hero-selector-hint">Selecciona una obra para previsualizar su ficha</span>
+              </div>
+              <div class="hero-selector-track">
+                <button
+                  v-for="obra in obrasDestacadas"
+                  :key="obra.id"
+                  type="button"
+                  class="hero-thumb-card"
+                  :class="{ 'is-selected': obra.id === contenidoDestacado.id }"
+                  @click="seleccionarDestacado(obra.id)"
+                >
+                  <img :src="obra.imagen" :alt="obra.titulo" class="hero-thumb-img">
+                  <div class="hero-thumb-info">
+                    <span class="hero-thumb-title">{{ obra.titulo }}</span>
+                    <span class="hero-thumb-sub">{{ obra.genero }} · {{ obra.anio }}</span>
+                  </div>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-visual">
+          <div
+            class="hero-poster-showcase is-clickable"
+            role="button"
+            tabindex="0"
+            :aria-label="'Abrir ficha técnica de ' + contenidoDestacado.titulo"
+            @click="abrirDetalle(contenidoDestacado)"
+            @keydown.enter.prevent="abrirDetalle(contenidoDestacado)"
+          >
+            <img
+              :src="contenidoDestacado.imagen"
+              :alt="contenidoDestacado.titulo"
+              class="hero-image"
+            >
+          </div>
+        </div>
+      </section>
+
+      <section aria-labelledby="catalogo-heading">
+        <div class="catalog-controls-shell">
+          <search-bar
+            v-model="terminoBusqueda"
+            :total-resultados="catalogoFiltrado.length"
+            :total-catalogo="catalogo.length"
+            @limpiar="limpiarBusqueda"
+          ></search-bar>
+
+          <filter-toolbar
+            :tipo-activo="tipoActivo"
+            :genero-activo="generoActivo"
+            :orden-activo="ordenActivo"
+            :generos-disponibles="generosDisponibles"
+            :conteo-por-tipo="conteoPorTipo"
+            :hay-filtros-activos="hayFiltrosActivos"
+            @cambiar-tipo="cambiarTipo"
+            @cambiar-genero="cambiarGenero"
+            @cambiar-orden="cambiarOrden"
+            @restablecer-filtros="restablecerFiltros"
+          ></filter-toolbar>
+        </div>
+
+        <div class="section-header">
+          <div class="section-title-group">
+            <span class="section-eyebrow">
+              {{ hayFiltrosActivos ? 'Selección filtrada' : 'Índice general' }}
+            </span>
+            <h2 id="catalogo-heading" class="section-title">
+              {{ tituloSeccionActiva }}
+            </h2>
+          </div>
+          <span class="section-count">
+            {{ catalogoFiltrado.length }} {{ catalogoFiltrado.length === 1 ? 'título disponible' : 'títulos disponibles' }}
+          </span>
+        </div>
+
+        <div class="catalog-grid" v-if="catalogoFiltrado.length > 0">
+          <media-card
+            v-for="item in catalogoFiltrado"
+            :key="item.id"
+            :item="item"
+            :genero-activo="generoActivo"
+            :es-favorito="idsFavoritos.has(item.id)"
+            @alternar-favorito="alternarFavorito"
+            @filtrar-genero="cambiarGenero"
+            @seleccionar-obra="abrirDetalle"
+          ></media-card>
+        </div>
+
+        <div class="empty-catalog-state" v-else>
+          <h3 class="empty-state-title">Sin coincidencias para estos criterios</h3>
+          <p class="empty-state-text">
+            No se encontraron títulos que combinen el formato, género y término de búsqueda actuales. Puedes modificar la selección o restablecer todos los filtros.
+          </p>
+          <button
+            type="button"
+            class="reset-action-btn"
+            @click="restablecerFiltros"
+          >
+            Restablecer todos los filtros
+          </button>
+        </div>
+      </section>
+      <section id="favoritos" class="favoritos-section" aria-labelledby="favoritos-heading">
+        <div class="section-header">
+          <h2 id="favoritos-heading" class="section-title">Favoritos</h2>
+          <span class="section-count">{{ favoritos.length }} guardados</span>
+        </div>
+        <div v-if="favoritos.length" class="catalog-grid">
+          <media-card
+            v-for="item in favoritos"
+            :key="item.id"
+            :item="item"
+            :genero-activo="generoActivo"
+            :es-favorito="true"
+            @alternar-favorito="alternarFavorito"
+            @filtrar-genero="cambiarGenero"
+            @seleccionar-obra="abrirDetalle"
+          ></media-card>
+        </div>
+        <p v-else class="empty-catalog-state">Marca la estrella de una película o serie para guardarla aquí.</p>
+      </section>
+    </main>
+
+    <detail-modal
+      :item="obraSeleccionada"
+      :obras-relacionadas="obrasRelacionadas"
+      :tiene-anterior="tieneObraAnterior"
+      :tiene-siguiente="tieneObraSiguiente"
+      @cerrar="cerrarDetalle"
+      @seleccionar-obra="abrirDetalle"
+      @filtrar-genero="cambiarGenero"
+      @obra-anterior="irObraAnterior"
+      @obra-siguiente="irObraSiguiente"
+    ></detail-modal>
+
+    <footer class="site-footer">
+      <div class="site-footer-inner footer-inner">
+        <span>Big Cinema — Explorador de películas y series</span>
+        <span>Desarrollado con Vue.js 3</span>
+      </div>
+    </footer>
+  </div>
+
+  <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+  <script src="src/data/catalogo.js"></script>
+  <script src="src/components/MediaCard.js"></script>
+  <script src="src/components/SearchBar.js"></script>
+  <script src="src/components/FilterToolbar.js"></script>
+  <script src="src/components/DetailModal.js"></script>
+  <script src="src/app.js"></script>
+</body>
+</html>
