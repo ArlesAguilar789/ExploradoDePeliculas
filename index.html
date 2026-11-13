@@ -22,6 +22,7 @@
         </a>
 
         <div class="header-meta">
+          <a href="#favoritos" class="favoritos-link">Favoritos ({{ favoritos.length }})</a>
           <span class="catalog-stat">
             <strong>{{ totalPeliculas }}</strong> películas
           </span>
@@ -171,6 +172,8 @@
             :key="item.id"
             :item="item"
             :genero-activo="generoActivo"
+            :es-favorito="idsFavoritos.has(item.id)"
+            @alternar-favorito="alternarFavorito"
             @filtrar-genero="cambiarGenero"
             @seleccionar-obra="abrirDetalle"
           ></media-card>
@@ -189,6 +192,25 @@
             Restablecer todos los filtros
           </button>
         </div>
+      </section>
+      <section id="favoritos" class="favoritos-section" aria-labelledby="favoritos-heading">
+        <div class="section-header">
+          <h2 id="favoritos-heading" class="section-title">Favoritos</h2>
+          <span class="section-count">{{ favoritos.length }} guardados</span>
+        </div>
+        <div v-if="favoritos.length" class="catalog-grid">
+          <media-card
+            v-for="item in favoritos"
+            :key="item.id"
+            :item="item"
+            :genero-activo="generoActivo"
+            :es-favorito="true"
+            @alternar-favorito="alternarFavorito"
+            @filtrar-genero="cambiarGenero"
+            @seleccionar-obra="abrirDetalle"
+          ></media-card>
+        </div>
+        <p v-else class="empty-catalog-state">Marca la estrella de una película o serie para guardarla aquí.</p>
       </section>
     </main>
 
