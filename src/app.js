@@ -1,4 +1,4 @@
-const { createApp, ref, computed } = Vue;
+const { createApp, ref, computed, onMounted, onUnmounted, watch } = Vue;
 
 function normalizarTexto(texto) {
   if (!texto) return "";
@@ -14,7 +14,8 @@ const app = createApp({
   components: {
     MediaCard,
     SearchBar,
-    FilterToolbar
+    FilterToolbar,
+    DetailModal
   },
   setup() {
     const catalogo = ref(CATALOGO_CONTENIDO);
@@ -23,6 +24,7 @@ const app = createApp({
     const generoActivo = ref("Todos");
     const ordenActivo = ref("archivo");
     const idDestacadoActivo = ref(1);
+    const obraSeleccionada = ref(null);
 
     const obrasDestacadas = computed(() => {
       return catalogo.value.filter((item) => item.destacado);
@@ -169,6 +171,35 @@ const app = createApp({
       return catalogo.value.filter((item) => item.tipo === "Serie").length;
     });
 
+    const obrasRelacionadas = computed(() => {
+      if (!obraSeleccionada.value) return [];
+      return catalogo.value
+        .filter(
+          (item) =>
+            item.genero === obraSeleccionada.value.genero &&
+            item.id !== obraSeleccionada.value.id
+        )
+        .slice(0, 4);
+    });
+
+    const indiceObraSeleccionada = computed(() => {
+      if (!obraSeleccionada.value) return -1;
+      return catalogoFiltrado.value.findIndex(
+        (item) => item.id === obraSeleccionada.value.id
+      );
+    });
+
+    const tieneObraAnterior = computed(() => {
+      return indiceObraSeleccionada.value > 0;
+    });
+
+    const tieneObraSiguiente = computed(() => {
+      return (
+        indiceObraSeleccionada.value !== -1 &&
+        indiceObraSeleccionada.value < catalogoFiltrado.value.length - 1
+      );
+    });
+
     function seleccionarDestacado(id) {
       idDestacadoActivo.value = id;
     }
@@ -200,6 +231,51 @@ const app = createApp({
       ordenActivo.value = "archivo";
     }
 
+    function abrirDetalle(item) {
+      obraSeleccionada.value = item;
+    }
+
+    function cerrarDetalle() {
+      obraSeleccionada.value = null;
+    }
+
+    function irObraAnterior() {
+      if (tieneObraAnterior.value) {
+        obraSeleccionada.value =
+          catalogoFiltrado.value[indiceObraSeleccionada.value - 1];
+      }
+    }
+
+    function irObraSiguiente() {
+      if (tieneObraSiguiente.value) {
+        obraSeleccionada.value =
+          catalogoFiltrado.value[indiceObraSeleccionada.value + 1];
+      }
+    }
+
+    function manejarTeclado(evento) {
+      if (!obraSeleccionada.value) return;
+      if (evento.key === "Escape") {
+        cerrarDetalle();
+      } else if (evento.key === "ArrowLeft") {
+        irObraAnterior();
+      } else if (evento.key === "ArrowRight") {
+        irObraSiguiente();
+      }
+    }
+
+    watch(obraSeleccionada, (nuevaObra) => {
+      document.body.style.overflow = nuevaObra ? "hidden" : "";
+    });
+
+    onMounted(() => {
+      window.addEventListener("keydown", manejarTeclado);
+    });
+
+    onUnmounted(() => {
+      window.removeEventListener("keydown", manejarTeclado);
+    });
+
     return {
       catalogo,
       terminoBusqueda,
@@ -207,6 +283,7 @@ const app = createApp({
       generoActivo,
       ordenActivo,
       idDestacadoActivo,
+      obraSeleccionada,
       obrasDestacadas,
       contenidoDestacado,
       busquedaActiva,
@@ -217,12 +294,19 @@ const app = createApp({
       tituloSeccionActiva,
       totalPeliculas,
       totalSeries,
+      obrasRelacionadas,
+      tieneObraAnterior,
+      tieneObraSiguiente,
       seleccionarDestacado,
       cambiarTipo,
       cambiarGenero,
       cambiarOrden,
       limpiarBusqueda,
-      restablecerFiltros
+      restablecerFiltros,
+      abrirDetalle,
+      cerrarDetalle,
+      irObraAnterior,
+      irObraSiguiente
     };
   }
 });

@@ -51,7 +51,17 @@
               <span class="hero-pill hero-pill-gold">Calificación {{ contenidoDestacado.calificacion }}</span>
             </div>
 
-            <h1 class="hero-headline">{{ contenidoDestacado.titulo }}</h1>
+            <div class="hero-title-row">
+              <h1 class="hero-headline">{{ contenidoDestacado.titulo }}</h1>
+              <button
+                type="button"
+                class="hero-detail-btn"
+                @click="abrirDetalle(contenidoDestacado)"
+              >
+                <span>Ver ficha técnica</span>
+              </button>
+            </div>
+
             <p class="hero-synopsis">{{ contenidoDestacado.sinopsis }}</p>
           </div>
 
@@ -101,7 +111,14 @@
         </div>
 
         <div class="hero-visual">
-          <div class="hero-poster-showcase">
+          <div
+            class="hero-poster-showcase is-clickable"
+            role="button"
+            tabindex="0"
+            :aria-label="'Abrir ficha técnica de ' + contenidoDestacado.titulo"
+            @click="abrirDetalle(contenidoDestacado)"
+            @keydown.enter.prevent="abrirDetalle(contenidoDestacado)"
+          >
             <img
               :src="contenidoDestacado.imagen"
               :alt="contenidoDestacado.titulo"
@@ -155,6 +172,7 @@
             :item="item"
             :genero-activo="generoActivo"
             @filtrar-genero="cambiarGenero"
+            @seleccionar-obra="abrirDetalle"
           ></media-card>
         </div>
 
@@ -174,6 +192,18 @@
       </section>
     </main>
 
+    <detail-modal
+      :item="obraSeleccionada"
+      :obras-relacionadas="obrasRelacionadas"
+      :tiene-anterior="tieneObraAnterior"
+      :tiene-siguiente="tieneObraSiguiente"
+      @cerrar="cerrarDetalle"
+      @seleccionar-obra="abrirDetalle"
+      @filtrar-genero="cambiarGenero"
+      @obra-anterior="irObraAnterior"
+      @obra-siguiente="irObraSiguiente"
+    ></detail-modal>
+
     <footer class="site-footer">
       <div class="site-footer-inner footer-inner">
         <span>CineSpot — Explorador de películas y series</span>
@@ -187,6 +217,7 @@
   <script src="src/components/MediaCard.js"></script>
   <script src="src/components/SearchBar.js"></script>
   <script src="src/components/FilterToolbar.js"></script>
+  <script src="src/components/DetailModal.js"></script>
   <script src="src/app.js"></script>
 </body>
 </html>
