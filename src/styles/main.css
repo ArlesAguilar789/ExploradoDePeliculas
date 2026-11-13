@@ -1249,11 +1249,28 @@ body {
   width: 100%;
   max-width: 1080px;
   max-height: calc(100vh - 3rem);
+  overflow-x: hidden;
   overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(244, 240, 234, 0.22) transparent;
   background-color: var(--bg-elevated);
   border: 1px solid var(--border-strong);
   border-radius: var(--radius-lg);
   box-shadow: 0 32px 72px -16px rgba(0, 0, 0, 0.92);
+}
+
+.modal-sheet::-webkit-scrollbar {
+  width: 7px;
+  height: 0;
+}
+
+.modal-sheet::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.modal-sheet::-webkit-scrollbar-thumb {
+  background-color: rgba(244, 240, 234, 0.22);
+  border-radius: 999px;
 }
 
 .modal-ambient-bg {
@@ -1450,9 +1467,9 @@ body {
 
 .modal-specs-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1rem;
-  padding: 1.15rem 1.25rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.9rem 1rem;
+  padding: 1.1rem 1.15rem;
   background-color: rgba(11, 11, 13, 0.65);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-md);
@@ -1492,9 +1509,9 @@ body {
 .trailer-player-module {
   display: flex;
   flex-direction: column;
-  gap: 0.9rem;
+  gap: 0.95rem;
   padding: 1.25rem;
-  background-color: rgba(8, 8, 10, 0.82);
+  background-color: rgba(8, 8, 10, 0.84);
   border: 1px solid var(--border-strong);
   border-radius: var(--radius-md);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
@@ -1502,7 +1519,7 @@ body {
 
 .trailer-module-header {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
   flex-wrap: wrap;
   gap: 0.75rem;
@@ -1511,7 +1528,7 @@ body {
 .trailer-header-titles {
   display: flex;
   flex-direction: column;
-  gap: 0.18rem;
+  gap: 0.22rem;
 }
 
 .trailer-header-titles .modal-section-label {
@@ -1519,37 +1536,25 @@ body {
   color: var(--accent-gold);
 }
 
-.trailer-active-caption {
-  font-size: 0.82rem;
-  font-weight: 500;
-  color: var(--text-secondary);
+.trailer-active-heading {
+  font-family: var(--font-sans);
+  font-size: 0.96rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
 }
 
-.trailer-external-link {
+.trailer-count-badge {
   display: inline-flex;
   align-items: center;
-  gap: 0.4rem;
-  background-color: rgba(244, 240, 234, 0.05);
-  color: var(--text-secondary);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-sm);
-  padding: 0.38rem 0.75rem;
-  font-family: var(--font-sans);
-  font-size: 0.74rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition: color 0.18s ease, border-color 0.18s ease, background-color 0.18s ease;
-}
-
-.trailer-external-link:hover {
-  color: var(--text-primary);
-  border-color: var(--accent-gold);
+  padding: 0.28rem 0.65rem;
   background-color: rgba(201, 162, 86, 0.12);
-}
-
-.trailer-external-link svg {
-  width: 13px;
-  height: 13px;
+  color: var(--accent-gold);
+  border: 1px solid rgba(201, 162, 86, 0.35);
+  border-radius: var(--radius-sm);
+  font-size: 0.72rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
 }
 
 /* Selector de Temporadas */
@@ -1558,7 +1563,7 @@ body {
   align-items: center;
   flex-wrap: wrap;
   gap: 0.45rem;
-  padding-bottom: 0.25rem;
+  padding-bottom: 0.15rem;
 }
 
 .season-tab-btn {
@@ -1624,12 +1629,6 @@ body {
   box-shadow: 0 18px 40px -12px rgba(0, 0, 0, 0.85);
 }
 
-.cinema-iframe-wrapper {
-  position: relative;
-  width: 100%;
-  height: 100%;
-}
-
 .cinema-iframe {
   width: 100%;
   height: 100%;
@@ -1637,180 +1636,105 @@ body {
   display: block;
 }
 
-.cinema-cover {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  cursor: pointer;
-  overflow: hidden;
-  display: flex;
-  align-items: flex-end;
-  padding: 1.35rem;
-}
-
-.cinema-cover-img {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  filter: brightness(0.75) contrast(1.06);
-  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), filter 0.35s ease;
-}
-
-.cinema-cover:hover .cinema-cover-img {
-  transform: scale(1.03);
-  filter: brightness(0.88) contrast(1.08);
-}
-
-.cinema-cover-scrim {
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(circle at center, rgba(11, 11, 13, 0.2) 0%, rgba(11, 11, 13, 0.75) 100%),
-    linear-gradient(to top, rgba(8, 8, 10, 0.94) 0%, rgba(8, 8, 10, 0.25) 55%, rgba(8, 8, 10, 0.5) 100%);
-  pointer-events: none;
-}
-
-.cinema-play-trigger {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -56%);
-  display: inline-flex;
-  align-items: center;
-  gap: 0.7rem;
-  background-color: rgba(11, 11, 13, 0.82);
-  color: var(--text-primary);
-  border: 1px solid var(--accent-gold);
-  border-radius: 999px;
-  padding: 0.65rem 1.25rem 0.65rem 0.8rem;
-  font-family: var(--font-sans);
-  font-size: 0.82rem;
-  font-weight: 600;
-  letter-spacing: 0.02em;
-  cursor: pointer;
-  backdrop-filter: blur(8px);
-  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.65);
-  transition: background-color 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
-}
-
-.cinema-cover:hover .cinema-play-trigger {
-  background-color: var(--accent-crimson);
-  border-color: var(--accent-crimson);
-  transform: translate(-50%, -56%) scale(1.04);
-}
-
-.cinema-play-circle {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  background-color: var(--accent-gold);
-  color: #0b0b0d;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  transition: background-color 0.2s ease, color 0.2s ease;
-}
-
-.cinema-cover:hover .cinema-play-circle {
-  background-color: #ffffff;
-  color: var(--accent-crimson);
-}
-
-.cinema-play-circle svg {
-  width: 14px;
-  height: 14px;
-  margin-left: 2px;
-}
-
-.cinema-cover-caption {
-  position: relative;
-  z-index: 2;
-  display: flex;
-  flex-direction: column;
-  gap: 0.18rem;
-}
-
-.cinema-cover-badge {
-  font-size: 0.68rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  color: var(--accent-gold);
-}
-
-.cinema-cover-title {
-  font-family: var(--font-serif);
-  font-size: 1.25rem;
-  color: var(--text-primary);
-  line-height: 1.2;
-}
-
-/* Barra inferior de controles del tráiler */
+/* Barra inferior de información de temporada y controles */
 .trailer-controls-bar {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
   flex-wrap: wrap;
-  gap: 0.75rem;
-  padding-top: 0.2rem;
+  gap: 1rem;
+  padding-top: 0.25rem;
 }
 
-.trailer-season-stepper {
+.trailer-season-summary {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  flex: 1;
+  min-width: 220px;
+}
+
+.trailer-season-meta-row {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   gap: 0.5rem;
 }
 
-.trailer-step-btn {
+.trailer-season-pill {
+  font-size: 0.68rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--accent-gold);
+  background-color: rgba(201, 162, 86, 0.12);
+  border: 1px solid rgba(201, 162, 86, 0.3);
+  border-radius: 3px;
+  padding: 0.12rem 0.45rem;
+}
+
+.trailer-season-ep {
+  font-size: 0.76rem;
+  color: var(--text-secondary);
+  font-variant-numeric: tabular-nums;
+}
+
+.trailer-season-desc {
+  font-size: 0.82rem;
+  line-height: 1.5;
+  color: var(--text-secondary);
+}
+
+.trailer-control-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.trailer-ctrl-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
   background-color: rgba(244, 240, 234, 0.05);
   color: var(--text-secondary);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-sm);
-  padding: 0.35rem 0.7rem;
+  padding: 0.42rem 0.78rem;
   font-family: var(--font-sans);
-  font-size: 0.74rem;
+  font-size: 0.75rem;
   font-weight: 500;
   cursor: pointer;
   transition: color 0.18s ease, border-color 0.18s ease, background-color 0.18s ease;
 }
 
-.trailer-step-btn:hover:not(:disabled) {
+.trailer-ctrl-btn:hover:not(:disabled) {
   color: var(--text-primary);
   border-color: var(--border-strong);
   background-color: rgba(244, 240, 234, 0.1);
 }
 
-.trailer-step-btn:disabled {
+.trailer-ctrl-btn:disabled {
   opacity: 0.35;
   cursor: not-allowed;
 }
 
-.trailer-playback-actions {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  margin-left: auto;
-}
-
-.trailer-mode-btn {
-  background-color: rgba(201, 162, 86, 0.12);
+.trailer-ctrl-btn-yt {
   color: var(--accent-gold);
-  border: 1px solid rgba(201, 162, 86, 0.4);
-  border-radius: var(--radius-sm);
-  padding: 0.35rem 0.75rem;
-  font-family: var(--font-sans);
-  font-size: 0.74rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background-color 0.18s ease, color 0.18s ease;
+  border-color: rgba(201, 162, 86, 0.4);
+  background-color: rgba(201, 162, 86, 0.1);
 }
 
-.trailer-mode-btn:hover {
-  background-color: rgba(201, 162, 86, 0.22);
+.trailer-ctrl-btn-yt:hover:not(:disabled) {
   color: var(--text-primary);
+  border-color: var(--accent-gold);
+  background-color: rgba(201, 162, 86, 0.22);
+}
+
+.trailer-ctrl-btn svg {
+  width: 13px;
+  height: 13px;
+  flex-shrink: 0;
 }
 
 .modal-related-block {

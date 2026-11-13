@@ -22,6 +22,9 @@ const MediaCard = {
         : 0;
     },
     etiquetaTrailers() {
+      if (this.totalTrailers === 0) {
+        return "Consultar ficha técnica";
+      }
       if (this.item.tipo === "Serie" && this.totalTrailers > 1) {
         return this.totalTrailers + " tráilers por temporada";
       }
@@ -80,6 +83,7 @@ const MediaCard = {
           </div>
           <div class="hover-cta-line">
             <svg
+              v-if="totalTrailers > 0"
               class="hover-play-icon"
               viewBox="0 0 24 24"
               fill="currentColor"

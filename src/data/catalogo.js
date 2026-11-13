@@ -78,18 +78,7 @@ const CATALOGO_CONTENIDO = [
     imagen: "Imagenes/El Señor de los anillos.png",
     destacado: true,
     sinopsis: "El destino de toda una era descansa en las manos de quienes menos esperan la gloria. Cuando una reliquia forjada en la oscuridad despierta el poder ancestral de Mordor, dos amigos inseparables abandonan la paz de su hogar para cruzar reinos en guerra, montañas traicioneras y ejércitos implacables con una única misión: arrojar el Anillo Único al fuego del Monte del Destino antes de que la sombra devore el mundo.",
-    temporadasTrailers: [
-      {
-        numero: 1,
-        etiqueta: "Tráiler Oficial",
-        subtitulo: "La Comunidad del Anillo",
-        anio: 2026,
-        episodios: "178 min",
-        youtubeId: "V75dMMIW2B4",
-        inicioSegundos: 0,
-        descripcion: "Avance cinematográfico oficial de la travesía desde los valles élficos hasta las tierras oscuras de Mordor."
-      }
-    ]
+    temporadasTrailers: []
   },
   {
     id: 3,
@@ -104,18 +93,7 @@ const CATALOGO_CONTENIDO = [
     imagen: "Imagenes/El tiempo se detiene cuando estoy contigo.png",
     destacado: true,
     sinopsis: "Hay miradas capaces de silenciar el ruido del mundo entero en un solo segundo. Entre los cerezos en flor de la Universidad Nacional de Seúl, dos jóvenes con pasados y temperamentos completamente distintos coinciden en el mismo salón de clases, descubriendo que el amor llega sin avisar y que un instante junto a la persona correcta puede volverse eterno.",
-    temporadasTrailers: [
-      {
-        numero: 1,
-        etiqueta: "Tráiler Oficial",
-        subtitulo: "Edición de Primavera en Seúl",
-        anio: 2026,
-        episodios: "116 min",
-        youtubeId: "tcK9Eghsfq8",
-        inicioSegundos: 0,
-        descripcion: "Avance principal sobre el encuentro que detuvo el reloj bajo los cerezos del campus universitario."
-      }
-    ]
+    temporadasTrailers: []
   },
   {
     id: 4,
@@ -130,18 +108,7 @@ const CATALOGO_CONTENIDO = [
     imagen: "Imagenes/TECNM VS TECMTY.png",
     destacado: true,
     sinopsis: "Dos imperios académicos, un solo territorio y una rivalidad que salió de las aulas para convertirse en leyenda. Cuando el orgullo institucional choca con intereses de alto nivel, las facciones más poderosas del país desatan una guerra estratégica sin cuartel donde la lealtad se paga caro y nadie puede darse el lujo de retroceder.",
-    temporadasTrailers: [
-      {
-        numero: 1,
-        etiqueta: "Tráiler Oficial",
-        subtitulo: "Dos instituciones, una rivalidad histórica",
-        anio: 2026,
-        episodios: "138 min",
-        youtubeId: "eHdRMOAT-Lc",
-        inicioSegundos: 0,
-        descripcion: "Adelanto exclusivo del enfrentamiento estratégico que marcó a toda una generación."
-      }
-    ]
+    temporadasTrailers: []
   },
   {
     id: 5,
@@ -156,18 +123,7 @@ const CATALOGO_CONTENIDO = [
     imagen: "Imagenes/Ataque en la red.jpg",
     destacado: true,
     sinopsis: "En la era digital, un solo comando de código puede poner de rodillas a una nación entera. Encerrado frente a seis monitores en la madrugada, un prodigio de la ciberseguridad descubre una brecha oculta que apunta directamente al sistema financiero global, pero al intentar rastrear al responsable se convierte en el blanco principal de una organización que controla cada cámara y cada servidor de la ciudad.",
-    temporadasTrailers: [
-      {
-        numero: 1,
-        etiqueta: "Tráiler Oficial",
-        subtitulo: "Ningún sistema es seguro",
-        anio: 2026,
-        episodios: "124 min",
-        youtubeId: "N6HGuJC--rk",
-        inicioSegundos: 0,
-        descripcion: "Avance de suspenso cibernético donde cada línea de código decide quién controla la red."
-      }
-    ]
+    temporadasTrailers: []
   },
   {
     id: 6,
@@ -182,18 +138,7 @@ const CATALOGO_CONTENIDO = [
     imagen: "Imagenes/Albert Y Einstein.jpg",
     destacado: false,
     sinopsis: "¿Qué ocurriría si las leyes del espacio y la energía fueran desafiadas en una misma noche? Cuando una descarga de alta tensión fractura la barrera temporal del universo, dos genios irrepetibles deben combinar la furia del electromagnetismo con los secretos de la relatividad para cerrar una anomalía cósmica antes de que la realidad misma deje de existir.",
-    temporadasTrailers: [
-      {
-        numero: 1,
-        etiqueta: "Tráiler Oficial",
-        subtitulo: "Colisión de mentes brillantes",
-        anio: 2026,
-        episodios: "132 min",
-        youtubeId: "bK6ldnjE3Y0",
-        inicioSegundos: 0,
-        descripcion: "Avance cinematográfico sobre el experimento cuántico y electromagnético que alteró el tejido del tiempo."
-      }
-    ]
+    temporadasTrailers: []
   },
   {
     id: 7,
@@ -317,7 +262,7 @@ const CATALOGO_CONTENIDO = [
         subtitulo: "Edición de Colección",
         anio: 2000,
         episodios: "102 min",
-        youtubeId: "2GIsletFFDc",
+        youtubeId: "d1QmQsRD9_w",
         inicioSegundos: 0,
         descripcion: "Tráiler oficial del thriller satírico y psicológico protagonizado por Christian Bale."
       }
@@ -881,7 +826,7 @@ const CATALOGO_CONTENIDO = [
         subtitulo: "Operación en Langley",
         anio: 1996,
         episodios: "110 min",
-        youtubeId: "Ahg6qcnoW_g",
+        youtubeId: "L8Pbjh4EZRk",
         inicioSegundos: 0,
         descripcion: "Tráiler cinematográfico original de la primera misión de Ethan Hunt dirigida por Brian De Palma."
       }
@@ -894,24 +839,13 @@ const CATALOGO_CONTENIDO = [
     genero: "Terror",
     anio: 2026,
     duracion: "118 min",
-    director: "Zach Cregger",
+    director: "Producción Especial",
     clasificacion: "R",
     calificacion: "7.8",
     imagen: "Imagenes/Residen Evil Noche 0.jpg",
     destacado: false,
     sinopsis: "El teléfono suena a mitad de la noche en las afueras de Raccoon City, pero del otro lado de la línea ya no queda nadie humano. Atrapado en el epicentro del primer brote biológico de la corporación Umbrella, un hombre armado apenas con su instinto descubre que el verdadero horror no está tratando de entrar a la casa, sino que ya está adentro.",
-    temporadasTrailers: [
-      {
-        numero: 1,
-        etiqueta: "Tráiler Oficial",
-        subtitulo: "El origen del brote en Raccoon City",
-        anio: 2026,
-        episodios: "118 min",
-        youtubeId: "BKlrY6LPdVA",
-        inicioSegundos: 0,
-        descripcion: "Avance de terror y supervivencia ambientado en la noche en que cayó Raccoon City."
-      }
-    ]
+    temporadasTrailers: []
   },
   {
     id: 20,
@@ -1137,7 +1071,7 @@ const CATALOGO_CONTENIDO = [
         subtitulo: "El león, la bruja y el ropero",
         anio: 2005,
         episodios: "143 min",
-        youtubeId: "R9nktA3N_W4",
+        youtubeId: "usEkWtuNn-w",
         inicioSegundos: 0,
         descripcion: "Avance épico de la adaptación cinematográfica de la obra de C. S. Lewis."
       }
@@ -1219,7 +1153,7 @@ const CATALOGO_CONTENIDO = [
         subtitulo: "Nuevas elecciones estudiantiles",
         anio: 2020,
         episodios: "12 episodios",
-        youtubeId: "l56oma_GLMc",
+        youtubeId: "_NkxM_uLUpw",
         inicioSegundos: 0,
         descripcion: "La disolución del consejo estudiantil y la llegada de Miko Iino ponen a prueba los sentimientos de ambos protagonistas."
       },
@@ -1301,7 +1235,7 @@ const CATALOGO_CONTENIDO = [
         subtitulo: "El desastre de maná",
         anio: 2021,
         episodios: "23 episodios",
-        youtubeId: "52f680O9_cY",
+        youtubeId: "k5VxfJpzy1Q",
         inicioSegundos: 0,
         descripcion: "Rudeus aprende magia bajo la tutela de Roxy y debe cruzar el Continente Demoníaco junto a Eris y Ruijerd."
       },

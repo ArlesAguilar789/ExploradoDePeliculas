@@ -36,32 +36,21 @@ const DetailModal = {
   ],
   data() {
     return {
-      indiceTrailerActivo: 0,
-      reproduciendoIframe: false,
-      miniaturaFallida: false
+      indiceTrailerActivo: 0
     };
   },
   computed: {
     listaTrailers() {
-      if (!this.item) return [];
+      if (!this.item || this.item.director === "Producción Especial") {
+        return [];
+      }
       if (
         Array.isArray(this.item.temporadasTrailers) &&
         this.item.temporadasTrailers.length > 0
       ) {
         return this.item.temporadasTrailers;
       }
-      return [
-        {
-          numero: 1,
-          etiqueta: this.item.tipo === "Serie" ? "Temporada 1" : "Tráiler Oficial",
-          subtitulo: this.item.titulo,
-          anio: this.item.anio,
-          episodios: this.item.duracion,
-          youtubeId: "mXd1zTwcQ18",
-          inicioSegundos: 0,
-          descripcion: this.item.sinopsis
-        }
-      ];
+      return [];
     },
     trailerActivo() {
       return (
@@ -73,10 +62,37 @@ const DetailModal = {
     urlEmbedYoutube() {
       if (!this.trailerActivo) return "";
       const inicio = this.trailerActivo.inicioSegundos || 0;
+      const esArchivoLocal =
+        typeof window !== "undefined" &&
+        window.location &&
+        window.location.protocol === "file:";
+
+      if (esArchivoLocal) {
+        const config = {
+          videoId_s: this.trailerActivo.youtubeId,
+          controls_s: 1,
+          rel_s: 0,
+          loop_s: 0,
+          start: inicio,
+          playerLang: "es",
+          preventFullScreen_s: 1,
+          modestbranding_s: 1,
+          iv_load_policy: 3,
+          showClosedCaptions_s: 0,
+          contentScale_s: 1,
+          allowWebViewZoom: false
+        };
+        return (
+          "https://lonelycpp.github.io/react-native-youtube-iframe/iframe.html?data=" +
+          encodeURIComponent(JSON.stringify(config))
+        );
+      }
+
       return (
-        "https://www.youtube.com/embed/" +
+        "https://www.youtube-nocookie.com/embed/" +
         this.trailerActivo.youtubeId +
-        "?autoplay=1&rel=0&modestbranding=1" +
+        "?rel=0&modestbranding=1" +
+        (this.iniciarReproduccion ? "&autoplay=1" : "") +
         (inicio > 0 ? "&start=" + inicio : "")
       );
     },
@@ -88,78 +104,33 @@ const DetailModal = {
         this.trailerActivo.youtubeId +
         (inicio > 0 ? "&t=" + inicio + "s" : "")
       );
-    },
-    urlMiniaturaTrailer() {
-      if (!this.trailerActivo || this.miniaturaFallida) {
-        return this.item ? this.item.imagen : "";
-      }
-      return (
-        "https://i.ytimg.com/vi/" +
-        this.trailerActivo.youtubeId +
-        "/hqdefault.jpg"
-      );
     }
   },
   watch: {
     item: {
       immediate: true,
-      handler(nuevaObra) {
+      handler() {
         this.indiceTrailerActivo = 0;
-        this.miniaturaFallida = false;
-        this.reproduciendoIframe = Boolean(nuevaObra && this.iniciarReproduccion);
-      }
-    },
-    iniciarReproduccion(nuevoValor) {
-      if (nuevoValor && this.item) {
-        this.reproduciendoIframe = true;
       }
     }
   },
   methods: {
     seleccionarTemporada(indice) {
       this.indiceTrailerActivo = indice;
-      this.miniaturaFallida = false;
-    },
-    activarReproductor() {
-      this.reproduciendoIframe = true;
-    },
-    detenerReproductor() {
-      this.reproduciendoIframe = false;
     },
     temporadaAnterior() {
       if (this.indiceTrailerActivo > 0) {
         this.indiceTrailerActivo -= 1;
-        this.miniaturaFallida = false;
       }
     },
     temporadaSiguiente() {
       if (this.indiceTrailerActivo < this.listaTrailers.length - 1) {
         this.indiceTrailerActivo += 1;
-        this.miniaturaFallida = false;
       }
     },
     abrirVentanaYoutube() {
       if (!this.trailerActivo) return;
-      const ancho = 1040;
-      const alto = 600;
-      const izquierda = Math.max(0, Math.round((window.screen.width - ancho) / 2));
-      const arriba = Math.max(0, Math.round((window.screen.height - alto) / 2));
-      window.open(
-        this.urlDirectaYoutube,
-        "BigCinemaTrailerPlayer",
-        "width=" +
-          ancho +
-          ",height=" +
-          alto +
-          ",left=" +
-          izquierda +
-          ",top=" +
-          arriba +
-          ",resizable=yes,scrollbars=yes"
-      );
-    },
-    manejarErrorMiniatura() {
-      this.miniaturaFallida = true;
+      window.open(this.urlDirectaYoutube, "_blank", "noopener,noreferrer");
     },
     seleccionarGeneroYCerrar(genero) {
       this.$emit("filtrar-genero", genero);
@@ -190,7 +161,7 @@ const DetailModal = {
             <button
               type="button"
               class="modal-fav-action-btn"
-              :class="{ 'is-saved': esFavorito }"
+              :class="{ 'is-active': esFavorito }"
               @click="$emit('alternar-favorito', item.id)"
             >
               <svg
@@ -249,7 +220,9 @@ const DetailModal = {
           <div class="modal-details-column">
             <div class="modal-top-bar">
               <div class="modal-badges">
-                <span class="modal-kicker">Ficha técnica y proyección</span>
+                <span class="modal-kicker">
+                  {{ trailerActivo ? 'Ficha técnica y proyección' : 'Ficha técnica de archivo' }}
+                </span>
                 <span class="hero-pill">{{ item.tipo }}</span>
                 <span class="hero-pill">{{ item.clasificacion }}</span>
                 <span class="hero-pill hero-pill-gold">Calificación {{ item.calificacion }}</span>
@@ -326,7 +299,8 @@ const DetailModal = {
                   :aria-selected="index === indiceTrailerActivo"
                   @click="seleccionarTemporada(index)"
                 >
-                  <span class="season-tab-num">{{ temporada.etiqueta }}</span>
+                  <span class="season-tab-index">T{{ temporada.numero }}</span>
+                  <span>{{ temporada.etiqueta }}</span>
                   <span class="season-tab-year">{{ temporada.anio }}</span>
                 </button>
               </div>
@@ -334,8 +308,7 @@ const DetailModal = {
               <!-- Pantalla 16:9 -->
               <div class="cinema-viewport">
                 <iframe
-                  v-if="reproduciendoIframe"
-                  :key="trailerActivo.youtubeId + '-' + indiceTrailerActivo"
+                  :key="item.id + '-' + indiceTrailerActivo + '-' + trailerActivo.youtubeId"
                   :src="urlEmbedYoutube"
                   :title="'Tráiler de ' + item.titulo + ' - ' + trailerActivo.etiqueta"
                   class="cinema-iframe"
@@ -344,49 +317,18 @@ const DetailModal = {
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                   allowfullscreen
                 ></iframe>
-
-                <div v-else class="cinema-cover" @click="activarReproductor">
-                  <img
-                    :src="urlMiniaturaTrailer"
-                    :alt="trailerActivo.subtitulo"
-                    class="cinema-cover-img"
-                    @error="manejarErrorMiniatura"
-                  >
-                  <div class="cinema-cover-scrim"></div>
-
-                  <div class="cinema-cover-center">
-                    <button
-                      type="button"
-                      class="cinema-play-trigger"
-                      @click.stop="activarReproductor"
-                      :aria-label="'Reproducir ' + trailerActivo.etiqueta + ' de ' + item.titulo"
-                    >
-                      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                        <polygon points="6 4 20 12 6 20 6 4"></polygon>
-                      </svg>
-                    </button>
-                    <span class="cinema-play-label">
-                      Reproducir {{ trailerActivo.etiqueta.toLowerCase() }}
-                    </span>
-                  </div>
-
-                  <div class="cinema-cover-bottom">
-                    <div class="cinema-season-meta">
-                      <span class="cinema-season-tag">{{ trailerActivo.etiqueta }}</span>
-                      <span class="cinema-season-ep">{{ trailerActivo.episodios }} · Estreno {{ trailerActivo.anio }}</span>
-                    </div>
-                    <p class="cinema-season-desc">{{ trailerActivo.descripcion }}</p>
-                  </div>
-                </div>
               </div>
 
-              <!-- Barra de Controles del Reproductor -->
+              <!-- Barra Inferior de Información de Temporada y Controles -->
               <div class="trailer-controls-bar">
-                <div class="trailer-status-info">
-                  <span class="trailer-status-dot" :class="{ 'is-live': reproduciendoIframe }"></span>
-                  <span class="trailer-status-text">
-                    {{ reproduciendoIframe ? 'Reproduciendo ' + trailerActivo.etiqueta : 'Listo para proyectar · ' + trailerActivo.episodios }}
-                  </span>
+                <div class="trailer-season-summary">
+                  <div class="trailer-season-meta-row">
+                    <span class="trailer-season-pill">{{ trailerActivo.etiqueta }}</span>
+                    <span class="trailer-season-ep">{{ trailerActivo.episodios }} · Estreno {{ trailerActivo.anio }}</span>
+                  </div>
+                  <p class="trailer-season-desc" v-if="trailerActivo.descripcion">
+                    {{ trailerActivo.descripcion }}
+                  </p>
                 </div>
 
                 <div class="trailer-control-actions">
@@ -411,26 +353,16 @@ const DetailModal = {
                   </button>
 
                   <button
-                    v-if="reproduciendoIframe"
-                    type="button"
-                    class="trailer-ctrl-btn"
-                    @click="detenerReproductor"
-                  >
-                    Mostrar portada
-                  </button>
-
-                  <button
                     type="button"
                     class="trailer-ctrl-btn trailer-ctrl-btn-yt"
                     @click="abrirVentanaYoutube"
-                    title="Abrir el tráiler en el reproductor de YouTube si el navegador restringe incrustaciones locales"
                   >
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                       <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
                       <polyline points="15 3 21 3 21 9"></polyline>
                       <line x1="10" y1="14" x2="21" y2="3"></line>
                     </svg>
-                    <span>Proyectar en YouTube</span>
+                    <span>Ver en YouTube</span>
                   </button>
                 </div>
               </div>
@@ -439,7 +371,7 @@ const DetailModal = {
             <div class="modal-related-block" v-if="obrasRelacionadas.length > 0">
               <div class="modal-related-header">
                 <h3 class="modal-section-label">Más obras de {{ item.genero.toLowerCase() }}</h3>
-                <span class="modal-related-hint">Selecciona otra obra para consultar su ficha y tráilers</span>
+                <span class="modal-related-hint">Selecciona otra obra para consultar su ficha</span>
               </div>
 
               <div class="modal-related-grid">
