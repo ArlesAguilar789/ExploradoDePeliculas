@@ -21,6 +21,14 @@ function cargarFavoritos() {
   }
 }
 
+function guardarFavoritosEnStorage(conjuntoIds) {
+  try {
+    localStorage.setItem(CLAVE_FAVORITOS, JSON.stringify([...conjuntoIds]));
+  } catch {
+    // La selección permanece activa durante la sesión actual.
+  }
+}
+
 const app = createApp({
   components: {
     MediaCard,
@@ -31,27 +39,34 @@ const app = createApp({
   setup() {
     const catalogo = ref(CATALOGO_CONTENIDO);
     const idsFavoritos = ref(cargarFavoritos());
-    const favoritos = computed(() =>
-      catalogo.value.filter((item) => idsFavoritos.value.has(item.id))
-    );
-
-    function alternarFavorito(id) {
-      const ids = idsFavoritos.value;
-      if (!ids.delete(id)) ids.add(id);
-
-      try {
-        localStorage.setItem(CLAVE_FAVORITOS, JSON.stringify([...ids]));
-      } catch {
-        // La selección sigue disponible durante la sesión.
-      }
-    }
-
     const terminoBusqueda = ref("");
     const tipoActivo = ref("Todos");
     const generoActivo = ref("Todos");
     const ordenActivo = ref("archivo");
     const idDestacadoActivo = ref(1);
     const obraSeleccionada = ref(null);
+    const iniciarTrailerEnModal = ref(false);
+
+    const favoritos = computed(() =>
+      catalogo.value.filter((item) => idsFavoritos.value.has(item.id))
+    );
+
+    function alternarFavorito(id) {
+      const siguiente = new Set(idsFavoritos.value);
+      if (siguiente.has(id)) {
+        siguiente.delete(id);
+      } else {
+        siguiente.add(id);
+      }
+      idsFavoritos.value = siguiente;
+      guardarFavoritosEnStorage(siguiente);
+    }
+
+    function limpiarFavoritos() {
+      const vacio = new Set();
+      idsFavoritos.value = vacio;
+      guardarFavoritosEnStorage(vacio);
+    }
 
     const obrasDestacadas = computed(() => {
       return catalogo.value.filter((item) => item.destacado);
@@ -258,16 +273,19 @@ const app = createApp({
       ordenActivo.value = "archivo";
     }
 
-    function abrirDetalle(item) {
+    function abrirDetalle(item, autoReproducir = false) {
+      iniciarTrailerEnModal.value = Boolean(autoReproducir);
       obraSeleccionada.value = item;
     }
 
     function cerrarDetalle() {
       obraSeleccionada.value = null;
+      iniciarTrailerEnModal.value = false;
     }
 
     function irObraAnterior() {
       if (tieneObraAnterior.value) {
+        iniciarTrailerEnModal.value = false;
         obraSeleccionada.value =
           catalogoFiltrado.value[indiceObraSeleccionada.value - 1];
       }
@@ -275,6 +293,7 @@ const app = createApp({
 
     function irObraSiguiente() {
       if (tieneObraSiguiente.value) {
+        iniciarTrailerEnModal.value = false;
         obraSeleccionada.value =
           catalogoFiltrado.value[indiceObraSeleccionada.value + 1];
       }
@@ -308,12 +327,14 @@ const app = createApp({
       favoritos,
       idsFavoritos,
       alternarFavorito,
+      limpiarFavoritos,
       terminoBusqueda,
       tipoActivo,
       generoActivo,
       ordenActivo,
       idDestacadoActivo,
       obraSeleccionada,
+      iniciarTrailerEnModal,
       obrasDestacadas,
       contenidoDestacado,
       busquedaActiva,

@@ -5,19 +5,35 @@ const MediaCard = {
       type: Object,
       required: true
     },
-    esFavorito: Boolean,
+    esFavorito: {
+      type: Boolean,
+      default: false
+    },
     generoActivo: {
       type: String,
       default: "Todos"
     }
   },
   emits: ["filtrar-genero", "seleccionar-obra", "alternar-favorito"],
+  computed: {
+    totalTrailers() {
+      return Array.isArray(this.item.temporadasTrailers)
+        ? this.item.temporadasTrailers.length
+        : 0;
+    },
+    etiquetaTrailers() {
+      if (this.item.tipo === "Serie" && this.totalTrailers > 1) {
+        return this.totalTrailers + " tráilers por temporada";
+      }
+      return "Ver tráiler y ficha";
+    }
+  },
   template: `
     <article
       class="media-card is-interactive"
       tabindex="0"
       role="button"
-      :aria-label="'Ver ficha técnica de ' + item.titulo"
+      :aria-label="'Ver ficha técnica y tráilers de ' + item.titulo"
       @click="$emit('seleccionar-obra', item)"
       @keydown.enter.self.prevent="$emit('seleccionar-obra', item)"
       @keydown.space.self.prevent="$emit('seleccionar-obra', item)"
@@ -31,14 +47,48 @@ const MediaCard = {
         >
         <div class="poster-top-bar">
           <span class="poster-badge">{{ item.tipo }}</span>
-          <span class="poster-rating" v-if="item.calificacion">{{ item.calificacion }}</span>
+          <div class="poster-top-right">
+            <span class="poster-rating" v-if="item.calificacion">{{ item.calificacion }}</span>
+            <button
+              type="button"
+              class="poster-fav-btn"
+              :class="{ 'is-saved': esFavorito }"
+              :aria-pressed="esFavorito"
+              :aria-label="esFavorito ? 'Quitar ' + item.titulo + ' de favoritos' : 'Guardar ' + item.titulo + ' en favoritos'"
+              :title="esFavorito ? 'Quitar de favoritos' : 'Guardar en favoritos'"
+              @click.stop="$emit('alternar-favorito', item.id)"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                :fill="esFavorito ? 'currentColor' : 'none'"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+              </svg>
+            </button>
+          </div>
         </div>
+
         <div class="poster-hover-meta">
           <div class="hover-primary-row">
             <span class="hover-director">{{ item.director }}</span>
             <span class="hover-duration">{{ item.duracion }}</span>
           </div>
-          <span class="hover-cta-line">Consultar ficha técnica</span>
+          <div class="hover-cta-line">
+            <svg
+              class="hover-play-icon"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              aria-hidden="true"
+            >
+              <polygon points="6 4 20 12 6 20 6 4"></polygon>
+            </svg>
+            <span>{{ etiquetaTrailers }}</span>
+          </div>
         </div>
       </div>
 
@@ -55,16 +105,6 @@ const MediaCard = {
             {{ item.genero }}
           </button>
           <span class="card-year">{{ item.anio }}</span>
-          <button
-            type="button"
-            class="favorito-btn"
-            :aria-pressed="esFavorito"
-            :aria-label="'Favorito: ' + item.titulo"
-            :title="esFavorito ? 'Quitar de favoritos' : 'Agregar a favoritos'"
-            @click.stop="$emit('alternar-favorito', item.id)"
-          >
-            <span aria-hidden="true">{{ esFavorito ? '★' : '☆' }}</span>
-          </button>
         </div>
       </div>
     </article>

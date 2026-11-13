@@ -22,7 +22,22 @@
         </a>
 
         <div class="header-meta">
-          <a href="#favoritos" class="favoritos-link">Favoritos ({{ favoritos.length }})</a>
+          <a href="#favoritos" class="favoritos-nav-pill" :class="{ 'has-items': favoritos.length > 0 }">
+            <svg
+              viewBox="0 0 24 24"
+              :fill="favoritos.length > 0 ? 'currentColor' : 'none'"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+            </svg>
+            <span>Favoritos</span>
+            <span class="favoritos-nav-count">{{ favoritos.length }}</span>
+          </a>
+
           <span class="catalog-stat">
             <strong>{{ totalPeliculas }}</strong> películas
           </span>
@@ -54,13 +69,47 @@
 
             <div class="hero-title-row">
               <h1 class="hero-headline">{{ contenidoDestacado.titulo }}</h1>
-              <button
-                type="button"
-                class="hero-detail-btn"
-                @click="abrirDetalle(contenidoDestacado)"
-              >
-                <span>Ver ficha técnica</span>
-              </button>
+              <div class="hero-actions-group">
+                <button
+                  type="button"
+                  class="hero-play-btn"
+                  @click="abrirDetalle(contenidoDestacado, true)"
+                >
+                  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                    <polygon points="6 4 20 12 6 20 6 4"></polygon>
+                  </svg>
+                  <span>Reproducir tráiler</span>
+                </button>
+
+                <button
+                  type="button"
+                  class="hero-detail-btn"
+                  @click="abrirDetalle(contenidoDestacado, false)"
+                >
+                  <span>Ver ficha técnica</span>
+                </button>
+
+                <button
+                  type="button"
+                  class="hero-fav-btn"
+                  :class="{ 'is-saved': idsFavoritos.has(contenidoDestacado.id) }"
+                  :aria-pressed="idsFavoritos.has(contenidoDestacado.id)"
+                  :title="idsFavoritos.has(contenidoDestacado.id) ? 'Quitar de favoritos' : 'Guardar en favoritos'"
+                  @click="alternarFavorito(contenidoDestacado.id)"
+                >
+                  <svg
+                    viewBox="0 0 24 24"
+                    :fill="idsFavoritos.has(contenidoDestacado.id) ? 'currentColor' : 'none'"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                  </svg>
+                </button>
+              </div>
             </div>
 
             <p class="hero-synopsis">{{ contenidoDestacado.sinopsis }}</p>
@@ -116,9 +165,9 @@
             class="hero-poster-showcase is-clickable"
             role="button"
             tabindex="0"
-            :aria-label="'Abrir ficha técnica de ' + contenidoDestacado.titulo"
-            @click="abrirDetalle(contenidoDestacado)"
-            @keydown.enter.prevent="abrirDetalle(contenidoDestacado)"
+            :aria-label="'Abrir ficha técnica y tráilers de ' + contenidoDestacado.titulo"
+            @click="abrirDetalle(contenidoDestacado, false)"
+            @keydown.enter.prevent="abrirDetalle(contenidoDestacado, false)"
           >
             <img
               :src="contenidoDestacado.imagen"
@@ -193,15 +242,33 @@
           </button>
         </div>
       </section>
+
       <section id="favoritos" class="favoritos-section" aria-labelledby="favoritos-heading">
         <div class="section-header">
-          <h2 id="favoritos-heading" class="section-title">Favoritos</h2>
-          <span class="section-count">{{ favoritos.length }} guardados</span>
+          <div class="section-title-group">
+            <span class="section-eyebrow">Colección personal</span>
+            <h2 id="favoritos-heading" class="section-title">Mis favoritos</h2>
+          </div>
+
+          <div class="favoritos-header-actions">
+            <span class="section-count">
+              {{ favoritos.length }} {{ favoritos.length === 1 ? 'obra guardada' : 'obras guardadas' }}
+            </span>
+            <button
+              v-if="favoritos.length > 0"
+              type="button"
+              class="clear-favorites-btn"
+              @click="limpiarFavoritos"
+            >
+              Vaciar colección
+            </button>
+          </div>
         </div>
-        <div v-if="favoritos.length" class="catalog-grid">
+
+        <div v-if="favoritos.length > 0" class="catalog-grid">
           <media-card
             v-for="item in favoritos"
-            :key="item.id"
+            :key="'fav-' + item.id"
             :item="item"
             :genero-activo="generoActivo"
             :es-favorito="true"
@@ -210,12 +277,20 @@
             @seleccionar-obra="abrirDetalle"
           ></media-card>
         </div>
-        <p v-else class="empty-catalog-state">Marca la estrella de una película o serie para guardarla aquí.</p>
+
+        <div v-else class="empty-catalog-state empty-favorites-card">
+          <h3 class="empty-state-title">Tu colección de favoritos está vacía</h3>
+          <p class="empty-state-text">
+            Marca el icono de estrella en cualquier película o serie del catálogo, o desde su ficha técnica, para conservar aquí tu selección personal.
+          </p>
+        </div>
       </section>
     </main>
 
     <detail-modal
       :item="obraSeleccionada"
+      :es-favorito="obraSeleccionada ? idsFavoritos.has(obraSeleccionada.id) : false"
+      :iniciar-reproduccion="iniciarTrailerEnModal"
       :obras-relacionadas="obrasRelacionadas"
       :tiene-anterior="tieneObraAnterior"
       :tiene-siguiente="tieneObraSiguiente"
@@ -224,6 +299,7 @@
       @filtrar-genero="cambiarGenero"
       @obra-anterior="irObraAnterior"
       @obra-siguiente="irObraSiguiente"
+      @alternar-favorito="alternarFavorito"
     ></detail-modal>
 
     <footer class="site-footer">
