@@ -5,12 +5,13 @@ const MediaCard = {
       type: Object,
       required: true
     },
+    esFavorito: Boolean,
     generoActivo: {
       type: String,
       default: "Todos"
     }
   },
-  emits: ["filtrar-genero", "seleccionar-obra"],
+  emits: ["filtrar-genero", "seleccionar-obra", "alternar-favorito"],
   template: `
     <article
       class="media-card is-interactive"
@@ -18,8 +19,8 @@ const MediaCard = {
       role="button"
       :aria-label="'Ver ficha técnica de ' + item.titulo"
       @click="$emit('seleccionar-obra', item)"
-      @keydown.enter.prevent="$emit('seleccionar-obra', item)"
-      @keydown.space.prevent="$emit('seleccionar-obra', item)"
+      @keydown.enter.self.prevent="$emit('seleccionar-obra', item)"
+      @keydown.space.self.prevent="$emit('seleccionar-obra', item)"
     >
       <div class="poster-frame">
         <img
@@ -54,6 +55,16 @@ const MediaCard = {
             {{ item.genero }}
           </button>
           <span class="card-year">{{ item.anio }}</span>
+          <button
+            type="button"
+            class="favorito-btn"
+            :aria-pressed="esFavorito"
+            :aria-label="'Favorito: ' + item.titulo"
+            :title="esFavorito ? 'Quitar de favoritos' : 'Agregar a favoritos'"
+            @click.stop="$emit('alternar-favorito', item.id)"
+          >
+            <span aria-hidden="true">{{ esFavorito ? '★' : '☆' }}</span>
+          </button>
         </div>
       </div>
     </article>

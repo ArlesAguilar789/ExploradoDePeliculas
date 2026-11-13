@@ -10,6 +10,17 @@ function normalizarTexto(texto) {
     .trim();
 }
 
+const CLAVE_FAVORITOS = "cinespot:favoritos";
+
+function cargarFavoritos() {
+  try {
+    const ids = JSON.parse(localStorage.getItem(CLAVE_FAVORITOS));
+    return new Set(Array.isArray(ids) ? ids : []);
+  } catch {
+    return new Set();
+  }
+}
+
 const app = createApp({
   components: {
     MediaCard,
@@ -19,6 +30,22 @@ const app = createApp({
   },
   setup() {
     const catalogo = ref(CATALOGO_CONTENIDO);
+    const idsFavoritos = ref(cargarFavoritos());
+    const favoritos = computed(() =>
+      catalogo.value.filter((item) => idsFavoritos.value.has(item.id))
+    );
+
+    function alternarFavorito(id) {
+      const ids = idsFavoritos.value;
+      if (!ids.delete(id)) ids.add(id);
+
+      try {
+        localStorage.setItem(CLAVE_FAVORITOS, JSON.stringify([...ids]));
+      } catch {
+        // La selección sigue disponible durante la sesión.
+      }
+    }
+
     const terminoBusqueda = ref("");
     const tipoActivo = ref("Todos");
     const generoActivo = ref("Todos");
@@ -278,6 +305,9 @@ const app = createApp({
 
     return {
       catalogo,
+      favoritos,
+      idsFavoritos,
+      alternarFavorito,
       terminoBusqueda,
       tipoActivo,
       generoActivo,

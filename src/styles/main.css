@@ -799,6 +799,46 @@ body {
   font-variant-numeric: tabular-nums;
 }
 
+.favoritos-section {
+  margin-top: 4rem;
+  scroll-margin-top: 5rem;
+}
+
+.favoritos-link {
+  color: var(--accent-gold);
+  white-space: nowrap;
+}
+
+.favoritos-link:hover {
+  text-decoration: underline;
+}
+
+.favorito-btn {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  margin-inline-start: auto;
+  min-width: 2.75rem;
+  min-height: 2.75rem;
+  color: var(--text-primary);
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  font-size: 1.25rem;
+  cursor: pointer;
+}
+
+.favorito-btn:hover,
+.favorito-btn[aria-pressed="true"] {
+  color: var(--accent-gold);
+  border-color: var(--accent-gold);
+}
+
+.favorito-btn:focus-visible {
+  outline: 2px solid var(--accent-gold);
+  outline-offset: 2px;
+}
+
 /* Cuadrícula de Catálogo */
 .catalog-grid {
   display: grid;
